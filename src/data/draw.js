@@ -2,6 +2,7 @@ let plottingList = [
   {
     type: "drawPoint",
     name: "点",
+    icon: "./img/1.png",
     style: {
       point: {
         pixelSize: 12,
@@ -28,6 +29,7 @@ let plottingList = [
   {
     type: "drawLineString",
     name: "线",
+    icon: "./img/2.png",
     style: {
       endpoint: {
         pixelSize: 12,
@@ -56,6 +58,7 @@ let plottingList = [
   {
     type: "drawPolygon",
     name: "多边形",
+    icon: "./img/3.png",
     style: {
       polygon: {
         color: "red",
@@ -102,10 +105,44 @@ let plottingList = [
   {
     type: "drawBillboard",
     name: "图标",
+    icon: "./img/4.png",
     style: {
       billboard: {
         color: "#ffffff",
-        image: require("../assets/fire4.png"),
+        image: "./img/4.png",
+        disableDepthTestDistance: 1e11,
+        distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 1e7),
+        scaleByDistance: new Cesium.NearFarScalar(0, 1, 1e6, 0.5),
+        width: 64,
+        height: 70,
+        pixelOffset: new Cesium.Cartesian2(-5, 0),
+        type: "Image",
+      },
+      label: {
+        text: "火焰",
+        color: "#000000",
+        style: 0,
+        font: "14px sans-serif",
+        outlineColor: "#ffffff",
+        outlineWidth: 2,
+        pixelOffset: new Cesium.Cartesian2(0, -50),
+        disableDepthTestDistance: 1e11,
+        showBackground: true,
+        backgroundColor: "#04A4B4",
+        scaleByDistance: new Cesium.NearFarScalar(0, 1, 1e6, 0.5),
+        show: true,
+        distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 1e7),
+      },
+    },
+  },
+  {
+    type: "drawBillboard",
+    name: "图标",
+    icon: "./img/5.png",
+    style: {
+      billboard: {
+        color: "#ffffff",
+        image: "./img/5.png",
         disableDepthTestDistance: 1e11,
         distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 1e7),
         scaleByDistance: new Cesium.NearFarScalar(0, 1, 1e6, 0.5),

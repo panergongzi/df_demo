@@ -1,13 +1,15 @@
 <template>
   <div>
-    <a-button
+    <div
       type="primary"
       class="design-btn"
       v-for="(item, index) in plottingList"
       :key="index"
       @click="drawPlottiing(item)"
-      >{{ item.name }}</a-button
     >
+      <img :src="item.icon" width="24" />
+      <span class="icon-plotting"> {{ item.name }}</span>
+    </div>
     <a-button type="danger" @click="removeAllPlotting" class="design-btn"
       >清除</a-button
     >
@@ -116,8 +118,10 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .design-btn {
   margin: 5px;
+}
+.icon-plotting {
 }
 </style>
