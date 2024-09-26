@@ -1,10 +1,10 @@
 <template>
   <div>
-    <a-button type="primary" class="design-btn" @click="openCarRoad"
-      >行车信息</a-button
-    >
+    <!-- <a-button type="primary" class="design-btn" @click="openCarRoad"
+      >行车路线</a-button
+    > -->
     <a-button type="primary" class="design-btn" @click="drawCarRoute"
-      >绘制路线</a-button
+      >行车路线</a-button
     >
     <a-button type="primary" class="design-btn" @click="firstCarView">
       第一视角</a-button
@@ -12,9 +12,13 @@
     <a-button type="primary" class="design-btn" @click="threeCarView"
       >第三视角</a-button
     >
-    <a-button type="primary" class="design-btn" @click="removeAll"
-      >清空</a-button
-    >
+    <el-button
+      type="danger"
+      icon="el-icon-delete"
+      @click="removeAll"
+      class="design-btn"
+      size="small"
+    ></el-button>
   </div>
 </template>
 <script>
@@ -35,6 +39,13 @@ export default {
   },
   beforeCreate() {
     this.ZDsID = [];
+  },
+  beforeDestroy() {
+    if (init) {
+      this.removeAll();
+      init.destroy();
+      init = undefined;
+    }
   },
   methods: {
     //路线
@@ -103,7 +114,37 @@ export default {
       }
     },
     async drawCarRoute() {
-      let positions = await init.addLines();
+      let positions = await init.addLines({
+        endpoint: {
+          pixelSize: 5,
+          color: Cesium.Color.RED,
+          outlineColor: Cesium.Color.WHITE,
+          outlineWidth: 2,
+          disableDepthTestDistance: 1e11,
+          show: false,
+        },
+        polyline: {
+          material: Cesium.Color.fromCssColorString("red"),
+          width: 5,
+          depthFailMaterial: Cesium.Color.fromCssColorString("red"),
+          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 1e7),
+          clampToGround: true, //开启贴地
+        },
+        label: {
+          text: "测量",
+          font: "14px sans-serif",
+          outlineColor: Cesium.Color.WHITE,
+          outlineWidth: 2,
+          pixelOffset: new Cesium.Cartesian2(0, -30),
+          disableDepthTestDistance: 1e11,
+          // disableDepthTestDistance: Number.MAX_VALUE,
+          showBackground: true,
+          backgroundColor: Cesium.Color.fromCssColorString("#04A4B4"),
+          scaleByDistance: new Cesium.NearFarScalar(0, 1, 1e6, 0.3),
+          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 5e4),
+          show: false,
+        },
+      });
       this.addAnimation(positions);
     },
     addAnimation(positions) {
@@ -114,7 +155,7 @@ export default {
         animationType: 1,
         speedType: 0,
         speed: 5, //速度
-        name: "小汽车", //车牌
+        name: "粤A0023", //车牌
         hpr: {
           heading: 0,
           pitch: 0,
@@ -128,6 +169,33 @@ export default {
             Cesium.Math.toRadians(-10), //倾斜角度
             10
           ),
+        },
+        pathStyle: {
+          material: Cesium.Color.RED,
+          width: 4,
+        },
+        entpointStyle: {
+          polyline: {
+            material: new Cesium.PolylineDashMaterialProperty({
+              color: Cesium.Color.YELLOW,
+              dashLength: 20,
+            }),
+            width: 2,
+            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+              0,
+              1e4
+            ),
+            show: false,
+          },
+          point: {
+            pixelSize: 10,
+            color: new Cesium.Color(0 / 255, 0 / 255, 255 / 255, 1),
+            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+              0,
+              1e4
+            ),
+            show: false,
+          },
         },
       };
       init.add(params);
@@ -148,7 +216,7 @@ export default {
     threeCarView() {
       if (init) {
         init.animation._viewAngle = {
-          type: 1,
+          type: 2,
           offset: new Cesium.HeadingPitchRange(
             Cesium.Math.toRadians(180), //水平角度
             Cesium.Math.toRadians(-45), //倾斜角度

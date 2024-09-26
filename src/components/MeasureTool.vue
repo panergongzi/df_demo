@@ -1,14 +1,30 @@
 <template>
   <div>
-    <a-button
+    <!-- <a-button
       type="primary"
       class="design-btn"
       v-for="(item, index) in toolList"
       :key="index"
       @click="apply(item)"
       >{{ item.name }}</a-button
+    > -->
+    <div
+      type="primary"
+      class="design-btn"
+      v-for="(item, index) in toolList"
+      :key="index"
+      @click="apply(item)"
     >
-    <a-button type="danger" class="design" @click="removeAll">清除</a-button>
+      <img :src="item.icon" width="24" />
+      <span class="icon-plotting"> {{ item.name }}</span>
+    </div>
+    <el-button
+      type="danger"
+      icon="el-icon-delete"
+      @click="removeAll"
+      class="design-btn"
+      size="small"
+    ></el-button>
   </div>
 </template>
 <script>
@@ -18,6 +34,7 @@ let toolList = measureToolList.map((item) => {
   return {
     name: item.name,
     type: item.type,
+    icon: item.icon,
   };
 });
 export default {
@@ -115,8 +132,11 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .design-btn {
   margin: 5px;
+  display: inline-block;
+}
+.icon-plotting {
 }
 </style>

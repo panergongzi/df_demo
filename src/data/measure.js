@@ -2,6 +2,7 @@ let measureToolList = [
   {
     name: "距离测量",
     type: "distance",
+    icon: "./img/6.png",
     style: {
       endpoint: {
         pixelSize: 5,
@@ -32,41 +33,11 @@ let measureToolList = [
       },
     },
   },
-  // {
-  //   name: "地表距离测量",
-  //   type: "distanceSurface",
-  //   style: {
-  //     endpoint: {
-  //       pixelSize: 5,
-  //       color: Cesium.Color.RED,
-  //       outlineColor: Cesium.Color.WHITE,
-  //       outlineWidth: 2,
-  //       disableDepthTestDistance: Number.POSITIVE_INFINITY,
-  //     },
-  //     polyline: {
-  //       material: Cesium.Color.fromCssColorString("#EEE06C"),
-  //       width: 5,
-  //       //   depthFailMaterial: Cesium.Color.fromCssColorString("#EEE06C"),
-  //       classificationType: Cesium.ClassificationType.BOTH,
-  //       clampToGround: true,
-  //     },
-  //     label: {
-  //       text: "测量",
-  //       font: "14px sans-serif",
-  //       outlineColor: Cesium.Color.WHITE,
-  //       outlineWidth: 2,
-  //       pixelOffset: new Cesium.Cartesian2(0, -30),
-  //       disableDepthTestDistance: Number.MAX_VALUE,
-  //       showBackground: true,
-  //       backgroundColor: Cesium.Color.fromCssColorString("#04A4B4"),
-  //       scaleByDistance: new Cesium.NearFarScalar(0, 1, 1e6, 0.3),
-  //       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 5e4),
-  //     },
-  //   },
-  // },
+
   {
     name: "表面积测量",
     type: "areaSurface",
+    icon: "./img/7.png",
     style: {
       label: {
         text: "测量",
@@ -97,6 +68,7 @@ let measureToolList = [
   {
     name: "体积测量",
     type: "volume",
+    icon: "./img/8.png",
     style: {
       label: {
         show: false,

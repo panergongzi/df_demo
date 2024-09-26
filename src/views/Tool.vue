@@ -8,7 +8,10 @@
         style="height: 400px"
       >
         <el-tab-pane label="路网信息专题" name="first"></el-tab-pane>
-        <el-tab-pane label="高速公路边坡巡检专题" name="SideSlope"></el-tab-pane>
+        <el-tab-pane
+          label="高速公路边坡巡检专题"
+          name="SideSlope"
+        ></el-tab-pane>
         <el-tab-pane label="路径还原专题" name="ResetRoad"></el-tab-pane>
         <el-tab-pane
           label="2，3维GIS数据展示能力"
@@ -23,6 +26,13 @@
         <DrawTool></DrawTool>
         <div>测量</div>
         <MeasureTool></MeasureTool>
+        <a-button
+          type="primary"
+          @click="exportImg"
+          class="design-btn"
+          size="small"
+          >输出图片</a-button
+        >
       </div>
       <div v-if="activeName == 'BackgroundData'">
         <BackgroundData></BackgroundData>
@@ -34,6 +44,8 @@
         <SideSlope></SideSlope>
       </div>
     </div>
+    <MJNode></MJNode>
+    <MousePosition ref="MousePositionNode"></MousePosition>
   </div>
 </template>
 
@@ -45,15 +57,93 @@ import ResetRoad from "@/components/resetRoad.vue";
 import BackgroundData from "@/components/BackgroundData.vue";
 import SideSlope from "@/components/SideSlope.vue";
 import MeasureTool from "@/components/MeasureTool.vue";
+import zhuangData from "@/data/zhuang.js";
+import MJNode from "@/components/MJTool.vue";
+import MousePosition from "@/components/MousePosition/index.vue";
 export default {
   data() {
     return {
       activeName: "first",
     };
   },
-  components: { MeasureTool, DrawTool, BackgroundData, ResetRoad, SideSlope },
+  components: {
+    MeasureTool,
+    DrawTool,
+    BackgroundData,
+    ResetRoad,
+    SideSlope,
+    MJNode,
+    MousePosition,
+  },
+  beforeCreate() {
+    this.ZDsID = [];
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.showZD(zhuangData);
+      this.$refs.MousePositionNode.init(viewer);
+    });
+  },
   methods: {
     handleClick() {},
+    //导出图片
+    async exportImg() {
+      let thumbnailBase64 = await tqsdk.utils.screenShot.canvasToBase64(
+        viewer.scene.canvas
+      );
+      tqsdk.utils.download.downloadIamge(thumbnailBase64, "输出结果");
+    },
+    //桩号
+    showZD(v) {
+      if (!v || !Array.isArray(v)) {
+        return;
+      }
+      //清空已有的桩点数据
+      for (let k = 0; k < this.ZDsID.length; k++) {
+        window.viewer.entities.removeById(this.ZDsID[k]);
+      }
+      this.ZDsID = [];
+      let arr = v;
+      let entityArr = [];
+      //循环遍历每一个桩点对象
+      for (let l = 0; l < arr.length; l++) {
+        //初始化
+        //判断是否无几何数据
+        let anchor = arr[l].anchor;
+        let point = tqsdk.utils.wktTransition.toCartesian3Point(anchor);
+        let ID = "ZD_" + arr[l].id.toString();
+        let popup = new tqsdk.popup.HeightPopup(
+          { position: point, height: 180, id: ID },
+          {
+            label: {
+              text: arr[l].name,
+              font: "20pt monospace",
+              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+                0,
+                1e6
+              ),
+              backgroundColor: Cesium.Color.fromCssColorString("#000"),
+            },
+            verticalLine: {
+              material: new Cesium.PolylineDashMaterialProperty({
+                color: Cesium.Color.fromCssColorString("#E27F21"),
+                dashLength: 20,
+              }),
+              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+                0,
+                1e4
+              ),
+              show: false,
+            },
+          }
+        );
+        let entity = window.viewer.entities.add(popup.entitys[0]);
+        //存入管理数据
+        this.ZDsID.push(ID);
+        entityArr.push(entity);
+      }
+      window.viewer.flyTo(entityArr);
+    },
   },
 };
 </script>

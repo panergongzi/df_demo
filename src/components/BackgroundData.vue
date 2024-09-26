@@ -1,129 +1,96 @@
 <template>
   <div>
-    <a-button
-      type="primary"
-      @click="addGisData(item)"
-      class="design-btn"
-      v-for="(item, index) in gisDataList"
-      :key="index"
-      >{{ item.name }}</a-button
-    >
-    <a-button type="primary" class="design-btn" @click="changeDataVisible"
-      >隐藏</a-button
-    >
-    <a-button type="primary" class="design-btn" @click="locateData"
-      >定位</a-button
-    >
+    <div>
+      <el-tree
+        :data="LayerData"
+        @node-click="handleNodeClick"
+        default-expand-all
+        show-checkbox
+        @check-change="checkChange"
+      >
+        <span class="custom-tree-node" slot-scope="{ node, data }">
+          <span>{{ node.label }}</span>
+          <span v-show="data.type" class="tool-item">
+            <i class="el-icon-position" @click="flyTo(data)">定位</i>
+          </span>
+        </span>
+      </el-tree>
+    </div>
   </div>
 </template>
+
 <script>
+import LayerData from "@/data/LayerData.js";
+let Init = tqsdk.widgets.BackgroundData;
 let init;
-import background from "@/data/background.js";
 export default {
   data() {
     return {
-      gisDataList: background,
+      LayerData,
     };
   },
   mounted() {
     this.$nextTick(() => {
-      init = new tqsdk.widgets.BackgroundData(window.viewer);
+      init = new Init(viewer, "containCesium");
     });
   },
-  destroyed() {
-    init && init.destroyed();
-  },
   methods: {
-    addGisData(item) {
+    handleNodeClick() {},
+    checkChange(v, state) {
+      // console.log(22222222, v, state);
+      if (v.type) {
+        this.addBackdata(v, state);
+        // this.flyTo(v);
+      }
+    },
+    async addBackdata(item, state) {
       let type = item.type;
-      switch (type) {
-        case "dom":
-        case "designRaster":
-          this.addDomLayer(item);
-          break;
-        case "threeDTile":
-        case "threeDPoint":
-          this.add3DtilesLayer(item);
-        default:
-          break;
+      // 加载实景三维
+      if (type == "threeDTile" || type == "bim" || type == "threeDPoint") {
+        let data = await init.add3dtiles(item, state);
+      } else if (type == "terrain") {
+        await init.addTerrain(item, state);
+        //加载全景图
+      } else if (type == "panorama") {
+        await init.addPanorama(item, state);
+      } else if (type == "dom" || type == "insar") {
+        let data = await init.addCustomTileLayer(item, state);
+      } else if (type == "designVector") {
+        let data = await init.addKML(item, state);
+      } else if (type == "designRaster") {
+        let data = await init.addCustomTileLayer(item, state);
+      } else {
+        let data = await init.add3dtiles(item, state);
       }
     },
-    async addDomLayer(item) {
-      let layer = await init.addCustomTileLayer(item, true);
-      this.selectLayer = layer;
-      this.locateData();
-    },
-    async add3DtilesLayer(item) {
-      try {
-        let layer = await init.add3dtiles(item, true);
-        let tileset = layer.ly;
-        this.selectLayer = layer;
-        var cartographic = Cesium.Cartographic.fromCartesian(
-          tileset.boundingSphere.center
-        );
-        let surface = Cesium.Cartesian3.fromRadians(
-          cartographic.longitude,
-          cartographic.latitude,
-          cartographic.height
-        );
-        let height = 10;
-        if (item.type === "threeDTile") {
-          height = 180;
-        }
-        let offset = Cesium.Cartesian3.fromRadians(
-          cartographic.longitude,
-          cartographic.latitude,
-          height
-        );
-        let translation = Cesium.Cartesian3.subtract(
-          offset,
-          surface,
-          new Cesium.Cartesian3()
-        );
-        tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation);
-        this.locateData();
-      } catch (error) {
-        console.log(`Error loading tileset: ${error}`);
-      }
-    },
-    changeDataVisible() {
-      if (this.selectLayer && this.selectLayer.ly) {
-        if (
-          this.selectLayer.datatype === "threeDTile" ||
-          this.selectLayer.datatype === "threeDPoint"
-        ) {
-          this.selectLayer.ly.show = false;
-        } else {
-          init.removeById(this.selectLayer.id);
-        }
-      }
-    },
-    locateData() {
-      if (this.selectLayer?.ly?.show) {
-        if (
-          this.selectLayer.datatype === "threeDTile" ||
-          this.selectLayer.datatype === "threeDPoint"
-        ) {
-          viewer.flyTo(this.selectLayer.ly);
-        } else if (this.selectLayer.datatype === "dom") {
-          viewer.camera.flyTo({
-            destination: Cesium.Cartesian3.fromDegrees(
-              111.376399,
-              22.496896,
-              300
-            ),
-          });
-        } else if (this.selectLayer.datatype === "designRaster") {
-          viewer.camera.flyTo({
-            destination: Cesium.Cartesian3.fromDegrees(
-              111.64068606,
-              22.70010139,
-              20000
-            ),
-          });
-        }
+    //定位到数据范围
+    flyTo(v) {
+      let type = v.type;
+      console.log(33333333333, type);
+      if (
+        type == "threeDTile" ||
+        type == "bim" ||
+        type == "threeDPoint" ||
+        type == "designVector"
+      ) {
+        init.flyToExtent(v.id);
+      } else {
+        let center = v.center;
+        tqsdk.camera.flyTo(viewer, {
+          position: Cesium.Cartesian3.fromDegrees(
+            center[0],
+            center[1],
+            center[2]
+          ),
+        });
       }
     },
   },
 };
 </script>
+
+<style scoped>
+.tool-item {
+  color: blue;
+}
+</style>

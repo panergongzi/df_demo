@@ -7124,7 +7124,7 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-"vue2-tq-zhaobiao@file:.":
+"yansshi@file:.":
   version "0.1.0"
   dependencies:
     "@turf/turf" "^5.1.6"
@@ -7134,7 +7134,7 @@ vue-template-es2015-compiler@^1.9.0:
     file-saver "^2.0.5"
     vue "^2.6.14"
     vue-router "^3.5.1"
-    vue2-tq-zhaobiao "file:C:/Users/root/AppData/Local/Yarn/Cache/v6/npm-vue2-tq-zhaobiao-0.1.0-a9669952-bc6a-4f40-a8dd-58bdf0955947-1727071566501/node_modules/vue2-tq-zhaobiao"
+    yansshi "file:C:/Users/root/AppData/Local/Yarn/Cache/v6/npm-yansshi-0.1.0-a9669952-bc6a-4f40-a8dd-58bdf0955947-1727071566501/node_modules/yansshi"
     vuex "^3.6.2"
 
 vue@^2.6.14:
