@@ -2,6 +2,7 @@
   <div class="container">
     <div class="header-menu">
       <span class="header-menu-title">时空路网一张图</span>
+      <div class="user-item">演示用户</div>
     </div>
     <Tool></Tool>
     <div id="cesiumContainer"></div>
@@ -116,7 +117,6 @@ export default {
   border: 1px solid rgba((128, 128, 0.5), green, blue, alpha);
   background: rgba(29, 30, 31, 0.356);
   box-shadow: 0 4px 8px rgb(128, 128, 128, 128/50%); */
- 
 }
 .right {
   position: absolute;
@@ -134,5 +134,12 @@ export default {
   width: 100px;
   height: 32px;
   margin: 8px;
+}
+.user-item {
+  float: right;
+  margin-right: 10px;
+  display: inline-block;
+  line-height: 50px;
+  font-size: 16px;
 }
 </style>
