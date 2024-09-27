@@ -14,8 +14,10 @@
     "file-saver": "^2.0.5",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",
-    "yansshi": "file:",
-    "vuex": "^3.6.2"
+    "vuex": "^3.6.2",
+    "vxe-table": "3.5.9",
+    "xe-utils": "^3.5.30",
+    "yansshi": "file:"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",

@@ -7124,19 +7124,6 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-"yansshi@file:.":
-  version "0.1.0"
-  dependencies:
-    "@turf/turf" "^5.1.6"
-    ant-design-vue "^1.7.8"
-    core-js "^3.8.3"
-    element-ui "^2.15.6"
-    file-saver "^2.0.5"
-    vue "^2.6.14"
-    vue-router "^3.5.1"
-    yansshi "file:C:/Users/root/AppData/Local/Yarn/Cache/v6/npm-yansshi-0.1.0-a9669952-bc6a-4f40-a8dd-58bdf0955947-1727071566501/node_modules/yansshi"
-    vuex "^3.6.2"
-
 vue@^2.6.14:
   version "2.7.16"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.7.16.tgz#98c60de9def99c0e3da8dae59b304ead43b967c9"
@@ -7149,6 +7136,11 @@ vuex@^3.6.2:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.6.2.tgz#236bc086a870c3ae79946f107f16de59d5895e71"
   integrity sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==
+
+vxe-table@3.5.9:
+  version "3.5.9"
+  resolved "https://registry.yarnpkg.com/vxe-table/-/vxe-table-3.5.9.tgz#b2fa902bef6cc4d2d4f02f0c2fa22aa90d891c3d"
+  integrity sha512-8idPnu377Ufwyv6/8GsAk2s9KNcF2nVdp3M8izMmrapOJ2fJRTWmaBTH//XbKqF4ELmvRPXAtkEOl6h37T7RaA==
 
 warning@^4.0.0:
   version "4.0.3"
@@ -7383,6 +7375,11 @@ ws@^8.13.0:
   resolved "https://registry.yarnpkg.com/ws/-/ws-8.18.0.tgz#0d7505a6eafe2b0e712d232b42279f53bc289bbc"
   integrity sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==
 
+xe-utils@^3.5.30:
+  version "3.5.30"
+  resolved "https://registry.yarnpkg.com/xe-utils/-/xe-utils-3.5.30.tgz#f63e92f0ba10d03da6054817c83515baa31f0845"
+  integrity sha512-5Ez6JUANpMakduiTLxrNObzqMebnM4697KvHW5okedkUjXvYgGvkbg0tABTkvwDW/Pb09v7vT68dzBOeAuOu0g==
+
 y18n@^5.0.5:
   version "5.0.8"
   resolved "https://registry.yarnpkg.com/y18n/-/y18n-5.0.8.tgz#7f4934d0f7ca8c56f95314939ddcd2dd91ce1d55"
@@ -7407,6 +7404,20 @@ yaml@^1.10.0, yaml@^1.10.2:
   version "1.10.2"
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
   integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
+
+"yansshi@file:.":
+  version "0.1.0"
+  dependencies:
+    "@turf/turf" "^5.1.6"
+    ant-design-vue "^1.7.8"
+    core-js "^3.8.3"
+    element-ui "^2.15.6"
+    file-saver "^2.0.5"
+    vue "^2.6.14"
+    vue-router "^3.5.1"
+    vuex "^3.6.2"
+    vxe-table "3.5.9"
+    yansshi "file:C:/Users/root/AppData/Local/Yarn/Cache/v6/npm-yansshi-0.1.0-fef39fc0-8a58-42fc-b1bd-70eff6c65c65-1727405244560/node_modules/yansshi"
 
 yargs-parser@^20.2.2:
   version "20.2.9"

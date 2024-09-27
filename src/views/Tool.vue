@@ -43,8 +43,11 @@
       <div v-if="activeName == 'SideSlope'">
         <SideSlope></SideSlope>
       </div>
+      <div v-if="activeName == 'first'">
+        <RoadInfor></RoadInfor>
+      </div>
     </div>
-    <MJNode></MJNode>
+
     <MousePosition ref="MousePositionNode"></MousePosition>
   </div>
 </template>
@@ -58,8 +61,9 @@ import BackgroundData from "@/components/BackgroundData.vue";
 import SideSlope from "@/components/SideSlope.vue";
 import MeasureTool from "@/components/MeasureTool.vue";
 import zhuangData from "@/data/zhuang.js";
-import MJNode from "@/components/MJTool.vue";
+
 import MousePosition from "@/components/MousePosition/index.vue";
+import RoadInfor from "@/components/RoadInfor/index.vue";
 export default {
   data() {
     return {
@@ -72,8 +76,8 @@ export default {
     BackgroundData,
     ResetRoad,
     SideSlope,
-    MJNode,
     MousePosition,
+    RoadInfor,
   },
   beforeCreate() {
     this.ZDsID = [];
@@ -170,7 +174,7 @@ export default {
   left: 10px;
   z-index: 3;
   background: #fff;
-  width: 300px;
-  height: 500px;
+  width: 420px;
+  min-Height: 500px;
 }
 </style>

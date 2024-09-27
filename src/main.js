@@ -7,10 +7,14 @@ import Antd from "ant-design-vue/es";
 import "ant-design-vue/dist/antd.css";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
+import VXETable from 'vxe-table'
+import 'vxe-table/lib/style.css'
 
+// Vue.use(VXETable)
 Vue.config.productionTip = false;
 Vue.use(Antd);
 Vue.use(ElementUI);
+Vue.use(VXETable);
 
 new Vue({
   router,
