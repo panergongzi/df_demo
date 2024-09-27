@@ -1,31 +1,16 @@
 <template>
   <div
-    class="mousePosintion mosu-tool-t"
     ref="mousePosintion"
     :style="{
       ...mousePosintionStyle,
     }"
- 
+    class="mosu-tool-t"
   >
-    <div
-      class="mouse-position-name x-convert"
-      v-show="isShow"
-      ref="left"
-      :style="{
-        ...leftStyle,
-      }"
-    >
-      <div class="item-body">经度： {{ longitudeString }}</div>
-      <div class="item-body">纬度： {{ latitudeString }}</div>
-    </div>
-    <div
-      :style="{
-        ...rightStyle,
-      }"
-      class="mouse-position-name2 x-convert"
-      ref="right"
-      v-show="stakeMark != ''"
-    >
+    <div class="item-body">经度： {{ longitudeString }}</div>
+    <div class="item-body">纬度： {{ latitudeString }}</div>
+
+    <div class="item-body">转换</div>
+    <div ref="right" v-show="stakeMark != ''" class="item-body">
       <p>桩号：{{ stakeMark }}</p>
     </div>
   </div>
@@ -207,5 +192,6 @@ export default {
   z-index: 666;
   height: 50px;
   line-height: 30px;
+  color: #fff;
 }
 </style>

@@ -17,10 +17,10 @@
           <MJNode></MJNode>
         </el-collapse-item>
         <el-collapse-item title="数据查询转换" name="2">
-          <MJNode></MJNode>
+          <Search ref="Search"></Search>
         </el-collapse-item>
         <el-collapse-item title="ETC拥堵展示" name="3">
-          <ETCInfor></ETCInfor>
+          <ETCInfor ref="ETCInfor"></ETCInfor>
         </el-collapse-item>
       </el-collapse>
     </div>
@@ -30,10 +30,12 @@
 <script>
 import MJNode from "@/components/RoadInfor/MJTool.vue";
 import ETCInfor from "./ETCInfor.vue";
+import Search from "./Search.vue";
 export default {
   components: {
     MJNode,
     ETCInfor,
+    Search,
   },
   data() {
     return {
@@ -41,7 +43,10 @@ export default {
     };
   },
   methods: {
-    handleChange() {},
+    handleChange() {
+      this.$refs.Search.removeAll();
+      this.$refs.ETCInfor.removeAll();
+    },
   },
 };
 </script>

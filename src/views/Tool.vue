@@ -175,6 +175,7 @@ export default {
   z-index: 3;
   background: #fff;
   width: 420px;
-  min-Height: 500px;
+  height: 500px;
+  overflow-x: hidden;
 }
 </style>

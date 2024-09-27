@@ -1,7 +1,14 @@
 <template>
   <div>
+    门架：
     <div v-for="item in mjData" :key="item.name" @click="clickMj(item)">
       {{ item.name }}
+    </div>
+    <div>
+      收费单元：
+      <div v-for="item in sfdyData" :key="item.name" @click="clickSFDY(item)">
+        {{ item.name }}
+      </div>
     </div>
     <vxe-modal
       v-model="showPop"
@@ -18,11 +25,11 @@
             ETC序列号：{{ selectedMj.coor[0] }}
             {{ selectedMj.ETC["设备信息"]["序列号"] }}
           </div>
-          <div>拥堵指数:{{ selectedMj["拥堵指数"] }}</div>
-          <div>流量指数:{{ selectedMj["流量指数"] }}</div>
-          <div>阻断指数:{{ selectedMj["阻断指数"] }}</div>
+          <div style="color:#ffb300">拥堵指数:{{ selectedMj["拥堵指数"] }}</div>
+          <div style="color:yellowgreen">流量指数:{{ selectedMj["流量指数"] }}</div>
+          <div style="color:red">阻断指数:{{ selectedMj["阻断指数"] }}</div>
           <div>
-            摄像头：{{ selectedMj.ETC["摄像头"] }}
+            摄像枪：{{ selectedMj.ETC["摄像头"] }}
             <el-button
               size="mini"
               type="primary"
@@ -38,6 +45,7 @@
 
 <script>
 import mjData from "@/data/mj.js";
+import sfdyData from "@/data/sfdy.js";
 const videoData = {
   id: "xxxxx3eeeee",
   url: "http://192.168.2.85/test/img/0786ba5d918aaf8f72dfefde13ceb25b.mp4",
@@ -65,11 +73,13 @@ export default {
       mjData,
       showPop: false,
       selectedMj: {},
+      sfdyData,
     };
   },
   mounted() {
     this.$nextTick(() => {
       this.addMJ(mjData);
+      this.addSFDY(sfdyData);
     });
   },
   methods: {
@@ -119,8 +129,52 @@ export default {
         let entity = window.viewer.entities.add(popup.entitys[0]);
       }
     },
+    addSFDY(arr) {
+      for (let l = 0; l < arr.length; l++) {
+        //初始化
+        //判断是否无几何数据
+        let coor = arr[l].coor;
+        let point = Cesium.Cartesian3.fromDegrees(coor[0], coor[1], coor[2]);
+        let popup = new tqsdk.popup.HeightPopup(
+          { position: point, height: 40, id: arr[l].id + l },
+          {
+            label: {
+              text: arr[l].name,
+              font: "14pt monospace",
+              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+                0,
+                1e6
+              ),
+              pixelOffset: new Cesium.Cartesian2(0, -50),
+              backgroundColor: Cesium.Color.fromCssColorString("green"),
+            },
+            billboard: {
+              image: "./img/2-3.png",
+              disableDepthTestDistance: 1e11,
+              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+                0,
+                1e7
+              ),
+              scaleByDistance: new Cesium.NearFarScalar(0, 1, 1e6, 0.5),
+              width: 48,
+              height: 48,
+              pixelOffset: new Cesium.Cartesian2(0, 0),
+              type: "Image",
+            },
+            verticalLine: {
+              material: Cesium.Color.fromCssColorString("#E27F21"),
+              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+                0,
+                1e4
+              ),
+              show: true,
+            },
+          }
+        );
+        let entity = window.viewer.entities.add(popup.entitys[0]);
+      }
+    },
     clickMj(v) {
-      console.log("点击选择", v);
       let center = v.coor;
       tqsdk.camera.flyTo(viewer, {
         position: Cesium.Cartesian3.fromDegrees(
@@ -149,6 +203,7 @@ export default {
       }, 1000);
       videoMergeList[id] = tcamera;
     },
+    clickSFDY() {},
   },
 };
 </script>
