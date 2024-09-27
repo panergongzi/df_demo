@@ -108,6 +108,13 @@
       </div>
     </div>
     <p class="label-ts">注意：K桩号和经纬度之间的互相转换在页面底部可以看到</p>
+    <el-button
+      type="danger"
+      icon="el-icon-delete"
+      @click="removeAll"
+      class="design-btn"
+      size="small"
+    ></el-button>
   </div>
 </template>
 
@@ -143,9 +150,7 @@ export default {
   mounted() {},
   methods: {
     zhChange() {
-      let indexItem = zhuangData.find(
-        (item) => item.name === this.zhFlyto
-      );
+      let indexItem = zhuangData.find((item) => item.name === this.zhFlyto);
       console.log(this.zhFlyto, indexItem);
       if (indexItem) {
         window.viewer.camera.flyTo({

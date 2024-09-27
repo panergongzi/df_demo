@@ -186,12 +186,14 @@ export default {
 }
 .mosu-tool-t {
   position: absolute;
-  width: 100%;
+  /* width: 100%; */
   background: rgba(0, 0, 0, 0.3);
   bottom: 0px;
   z-index: 666;
   height: 50px;
   line-height: 30px;
   color: #fff;
+  left: 300px;
+  right: 0px;
 }
 </style>

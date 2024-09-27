@@ -102,18 +102,21 @@ export default {
   overflow: hidden;
 }
 #cesiumContainer {
-  width: 100%;
+  /* width: 100%; */
+  width: calc(100%-400px);
   height: 100%;
   overflow: hidden;
+  margin-left: 300px;
 }
 .left {
-  position: absolute;
+  /* position: absolute;
   width: 300px;
   left: 25px;
   top: 60px;
   border: 1px solid rgba((128, 128, 0.5), green, blue, alpha);
   background: rgba(29, 30, 31, 0.356);
-  box-shadow: 0 4px 8px rgb(128, 128, 128, 128/50%);
+  box-shadow: 0 4px 8px rgb(128, 128, 128, 128/50%); */
+ 
 }
 .right {
   position: absolute;

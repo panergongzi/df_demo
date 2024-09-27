@@ -1,24 +1,33 @@
 <template>
   <div>
-    <!-- <a-button type="primary" class="design-btn" @click="openCarRoad"
-      >行车路线</a-button
-    > -->
-    <a-button type="primary" class="design-btn" @click="drawCarRoute"
-      >行车路线</a-button
-    >
-    <a-button type="primary" class="design-btn" @click="firstCarView">
-      第一视角</a-button
-    >
-    <a-button type="primary" class="design-btn" @click="threeCarView"
-      >第三视角</a-button
-    >
-    <el-button
-      type="danger"
-      icon="el-icon-delete"
-      @click="removeAll"
-      class="design-btn"
-      size="small"
-    ></el-button>
+    <div>
+      <p>在地图上绘制规划行车路线</p>
+      <a-button type="primary" class="design-btn" @click="drawCarRoute"
+        >行车路线</a-button
+      >
+      <el-button
+        type="danger"
+        icon="el-icon-delete"
+        @click="removeAll"
+        class="design-btn"
+        size="small"
+      ></el-button>
+    </div>
+    <div>
+      <el-select
+        v-model="viewValue"
+        placeholder="切换视角"
+        @change="changeView"
+      >
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        >
+        </el-option>
+      </el-select>
+    </div>
   </div>
 </template>
 <script>
@@ -30,6 +39,17 @@ export default {
     return {
       roadDialog: false,
       lineData: linString,
+      viewValue: "第一视角",
+      options: [
+        {
+          value: "第一视角",
+          label: "第一视角",
+        },
+        {
+          value: "第三视角",
+          label: "第三视角",
+        },
+      ],
     };
   },
   mounted() {
@@ -201,6 +221,13 @@ export default {
       init.add(params);
       init.path.featureLayer.flyToEntitys();
     },
+    changeView(v) {
+      if (v === "第一视角") {
+        this.firstCarView();
+      } else {
+        this.threeCarView();
+      }
+    },
     firstCarView() {
       if (init) {
         init.animation._viewAngle = {
@@ -227,6 +254,8 @@ export default {
     },
     removeAll() {
       init && init.removeAll();
+      viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+      viewer.trackedEntity = undefined;
     },
   },
 };

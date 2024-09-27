@@ -5,19 +5,19 @@
         v-model="activeName"
         @tab-click="handleClick"
         tab-position="right"
-        style="height: 400px"
+        style="height: 400px; width: 295px"
       >
-        <el-tab-pane label="路网信息专题" name="first"></el-tab-pane>
+        <el-tab-pane label="演示路网信息专题" name="first"></el-tab-pane>
         <el-tab-pane
-          label="高速公路边坡巡检专题"
+          label="演示高速公路边坡巡检专题"
           name="SideSlope"
         ></el-tab-pane>
-        <el-tab-pane label="路径还原专题" name="ResetRoad"></el-tab-pane>
+        <el-tab-pane label="演示路径还原专题" name="ResetRoad"></el-tab-pane>
         <el-tab-pane
-          label="2，3维GIS数据展示能力"
+          label="演示2，3维GIS数据展示能力"
           name="BackgroundData"
         ></el-tab-pane>
-        <el-tab-pane label="标绘测量工具" name="MeasureTool"></el-tab-pane>
+        <el-tab-pane label="演示标绘测量工具" name="MeasureTool"></el-tab-pane>
       </el-tabs>
     </div>
     <div class="leftMenu">
@@ -41,7 +41,8 @@
         <ResetRoad></ResetRoad>
       </div>
       <div v-if="activeName == 'SideSlope'">
-        <SideSlope></SideSlope>
+        无演示内容，不做演示
+        <!-- <SideSlope></SideSlope> -->
       </div>
       <div v-if="activeName == 'first'">
         <RoadInfor></RoadInfor>
@@ -154,7 +155,7 @@ export default {
 
 <style scoped>
 .toolMenu {
-  width: 190px;
+  /* width: 220px;
   height: 420px;
   background: #373232de;
   position: absolute;
@@ -163,19 +164,44 @@ export default {
   z-index: 3;
   border-radius: 5px;
   color: #fff;
-  margin: 0 15px;
+  margin: 0 15px; */
+  width: 295px;
+  height: 420px;
+  /* background: #373232de; */
+  position: absolute;
+  top: 60px;
+  left: 0px;
+  z-index: 333;
+  border-radius: 5px;
+  color: #fff;
+  margin: 5px;
 }
 /deep/ .el-tabs__item {
   color: #fff;
 }
 .leftMenu {
-  position: absolute;
+  /* position: absolute;
   top: 60px;
   left: 10px;
   z-index: 3;
   background: #fff;
   width: 420px;
   height: 500px;
+  border-radius: 5px;
   overflow-x: hidden;
+  padding: 5px; */
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  z-index: 3;
+  background: #fff;
+  width: 420px;
+  height: 500px;
+  border-radius: 5px;
+  overflow-x: hidden;
+  padding: 5px;
+}
+/deep/ .el-tabs__item {
+  color: #282121 !important;
 }
 </style>
