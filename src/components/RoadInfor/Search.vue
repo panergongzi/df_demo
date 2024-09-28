@@ -107,7 +107,7 @@
         </el-select>
       </div>
     </div>
-    <p class="label-ts">注意：K桩号和经纬度之间的互相转换在页面底部可以看到</p>
+    <p class="label-ts">注意：K桩号和经纬度之间的互相转换在页面右上角可以看到</p>
     <el-button
       type="danger"
       icon="el-icon-delete"

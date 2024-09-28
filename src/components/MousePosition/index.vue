@@ -6,8 +6,9 @@
     }"
     class="mosu-tool-t"
   >
-    <div class="item-body">经度： {{ longitudeString }}</div>
-    <div class="item-body">纬度： {{ latitudeString }}</div>
+  经纬度：
+    <div class="item-body"> {{ longitudeString }}</div>
+    <div class="item-body"> {{ latitudeString }}</div>
 
     <div class="item-body">转换</div>
     <div ref="right" v-show="stakeMark != ''" class="item-body">
@@ -186,14 +187,18 @@ export default {
 }
 .mosu-tool-t {
   position: absolute;
-  /* width: 100%; */
-  background: rgba(0, 0, 0, 0.3);
-  bottom: 0px;
-  z-index: 666;
-  height: 50px;
-  line-height: 30px;
-  color: #fff;
-  left: 300px;
-  right: 0px;
+    /* width: 100%; */
+    background: #1b9f2be3;
+    /* bottom: 0px; */
+    z-index: 666;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    /* left: 300px; */
+    right: 0px;
+    width: 520px;
+    overflow: hidden;
+    border: 1px solid #379719;
+    text-align: center;
 }
 </style>

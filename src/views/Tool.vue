@@ -8,10 +8,10 @@
         style="height: 400px; width: 295px"
       >
         <el-tab-pane label="演示路网信息专题" name="first"></el-tab-pane>
-        <el-tab-pane
+        <!-- <el-tab-pane
           label="演示高速公路边坡巡检专题"
           name="SideSlope"
-        ></el-tab-pane>
+        ></el-tab-pane> -->
         <el-tab-pane label="演示路径还原专题" name="ResetRoad"></el-tab-pane>
         <el-tab-pane
           label="演示2，3维GIS数据展示能力"
@@ -117,32 +117,55 @@ export default {
         let anchor = arr[l].anchor;
         let point = tqsdk.utils.wktTransition.toCartesian3Point(anchor);
         let ID = "ZD_" + arr[l].id.toString();
-        let popup = new tqsdk.popup.HeightPopup(
-          { position: point, height: 180, id: ID },
-          {
-            label: {
-              text: arr[l].name,
-              font: "20pt monospace",
-              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-                0,
-                1e6
-              ),
-              backgroundColor: Cesium.Color.fromCssColorString("#000"),
-            },
-            verticalLine: {
-              material: new Cesium.PolylineDashMaterialProperty({
-                color: Cesium.Color.fromCssColorString("#E27F21"),
-                dashLength: 20,
-              }),
-              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-                0,
-                1e4
-              ),
-              show: false,
-            },
-          }
-        );
-        let entity = window.viewer.entities.add(popup.entitys[0]);
+        // let popup = new tqsdk.popup.HeightPopup(
+        //   { position: point, height: 1, id: ID },
+        //   {
+        //     label: {
+        //       text: arr[l].name,
+        //       font: "15pt monospace",
+        //       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+        //         0,
+        //         1e6
+        //       ),
+        //       color: Cesium.Color.fromCssColorString("green"),
+        //       // backgroundColor: Cesium.Color.fromCssColorString("#000"),
+        //       showBackground: true,
+        //     },
+        //     verticalLine: {
+        //       material: new Cesium.PolylineDashMaterialProperty({
+        //         color: Cesium.Color.fromCssColorString("#E27F21"),
+        //         dashLength: 20,
+        //       }),
+        //       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+        //         0,
+        //         1e4
+        //       ),
+        //       show: false,
+        //     },
+        //   }
+        // );
+        // let entity = window.viewer.entities.add(popup.entitys[0]);
+        let entity = viewer.entities.add({
+          position: point,
+          label: {
+            text: arr[l].name,
+            font: "15pt monospace",
+            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+              0,
+              1e6
+            ),
+            fillColor: Cesium.Color.fromCssColorString("green"),
+            // backgroundColor: Cesium.Color.fromCssColorString("#000"),
+            showBackground: false,
+            disableDepthTestDistance: Number.MAX_VALUE,
+            pixelOffset: new Cesium.Cartesian2(0, -15),
+          },
+          point: {
+            pixelSize: 10,
+            color: Cesium.Color.fromCssColorString("green"),
+            disableDepthTestDistance: Number.MAX_VALUE,
+          },
+        });
         //存入管理数据
         this.ZDsID.push(ID);
         entityArr.push(entity);
@@ -180,28 +203,23 @@ export default {
   color: #fff;
 }
 .leftMenu {
-  /* position: absolute;
-  top: 60px;
-  left: 10px;
-  z-index: 3;
-  background: #fff;
-  width: 420px;
-  height: 500px;
-  border-radius: 5px;
-  overflow-x: hidden;
-  padding: 5px; */
   position: absolute;
-  top: 60px;
-  right: 10px;
-  z-index: 3;
-  background: #fff;
-  width: 420px;
-  height: 500px;
-  border-radius: 5px;
-  overflow-x: hidden;
-  padding: 5px;
+    top: 60px;
+    right: 10px;
+    z-index: 3;
+    background: #fff;
+    width: 400px;
+    height: 500px;
+    border-radius: 5px;
+    overflow-x: hidden;
+    padding: 5px;
 }
 /deep/ .el-tabs__item {
   color: #282121 !important;
+  font-size: 17px;
+}
+/deep/ .el-tabs__item.is-active {
+  color: #409eff !important;
+  font-size: 17px;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <div class="header-menu">
-      <span class="header-menu-title">时空路网一张图</span>
-      <div class="user-item">演示用户</div>
+      <span class="header-menu-title">数据指标高精度数字底图图业融合应用研究与开发项目（演示）</span>
+      <!-- <div class="user-item">演示用户</div> -->
     </div>
     <Tool></Tool>
     <div id="cesiumContainer"></div>
@@ -59,8 +59,12 @@ export default {
         requestRenderMode: false,
       });
       let layer = new tqsdk.layer.LayerCollection(window.viewer);
-      layer.add(tqsdk.layer.syBingLayer.addImage());
-      // layer.add(tqsdk.layer.syTDTLayer.addVectorImage());
+      // layer.add(tqsdk.layer.syBingLayer.addImage());
+      layer.add(
+        tqsdk.layer.syTDTLayer.addVectorImage({
+          tk: "eb1cfe728e083e5c189a4cd75a16d810",
+        })
+      );
       //window.viewer.scene.screenSpaceCameraController.enableTilt = false; //禁止相机倾斜
     },
     importMeasuring(v) {
@@ -85,13 +89,14 @@ export default {
 <style scoped>
 .header-menu {
   height: 50px;
-  width: 100%;
-  background: #2b46a7;
+  width: 300px;
+  background: #1b9f2b;
   color: #fff;
+  position: absolute;
 }
 .header-menu-title {
   display: inline-block;
-  font-size: 24px;
+  font-size: 16px;
   line-height: 50px;
   margin-left: 20px;
 }
@@ -108,6 +113,7 @@ export default {
   height: 100%;
   overflow: hidden;
   margin-left: 300px;
+  border-left: 1px solid #dadfd9;
 }
 .left {
   /* position: absolute;
