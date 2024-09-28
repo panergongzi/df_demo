@@ -181,6 +181,9 @@ export default {
       let data = await backgroundData.add3dtiles(modelLayer, true);
       viewer.flyTo(data.ly);
     },
+    downloadAll() {
+      // measureTool.downloadAll();
+    },
   },
 };
 </script>

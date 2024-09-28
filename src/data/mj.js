@@ -110,7 +110,7 @@ let list = [
     },
   },
   {
-    id: "G150144003011020042",
+    id: "G15044003011020042",
     name: "门架-HJK34FA0D",
     hex: "HJK34FA0D",
     stakeMark: "k119+990",
@@ -165,7 +165,7 @@ let list = [
     },
   },
   {
-    id: "G150144003011020042",
+    id: "G15014400301102042",
     name: "门架-HJK34FA0B",
     hex: "HJK34FA0B",
     stakeMark: "k119+990",

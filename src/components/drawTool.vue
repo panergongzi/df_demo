@@ -17,23 +17,7 @@
       class="design-btn"
       size="small"
     ></el-button>
-    <div>
-     
-      <a-button
-        type="primary"
-        @click="importData"
-        class="design-btn"
-        size="small"
-        >导入数据</a-button
-      >
-      <a-button
-        type="primary"
-        @click="exportData"
-        class="design-btn"
-        size="small"
-        >导出数据</a-button
-      >
-    </div>
+    <div></div>
   </div>
 </template>
 <script>
@@ -52,34 +36,34 @@ export default {
   mounted() {
     this.$nextTick(() => {
       platting = new tqsdk.widgets.Plotting(window.viewer);
-      
     });
   },
   methods: {
-   
     async drawPlottiing(item) {
       let { style, type } = item;
       if (platting[type] && typeof platting[type] === "function") {
         let re = await platting[type](style);
-        console.log(11111,re);
+        console.log(11111, re);
       }
     },
     //清除
     removeAllPlotting() {
       platting.removeAll();
     },
-    
+
     removeAll() {
       for (let k = 0; k < this.ZDsID.length; k++) {
         window.viewer.entities.removeById(this.ZDsID[k]);
       }
     },
-    importData(){
-
+    async importData(v) {
+      this.removeAllPlotting();
+      let re = await platting.importJson(JSON.parse(v));
+      re.flyTo();
     },
-    exportData(){
-
-    }
+    downloadAll() {
+      platting.downloadAll("标绘数据", "txt");
+    },
   },
   destroyed() {
     this.removeAll();
