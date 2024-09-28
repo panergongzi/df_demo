@@ -78,9 +78,9 @@ export default {
       let type = v.type;
       console.log(33333333333, type);
       if (
-        type == "threeDTile" ||
-        type == "bim" ||
-        type == "threeDPoint" ||
+        // type == "threeDTile" ||
+        // type == "bim" ||
+        // type == "threeDPoint" ||
         type == "designVector"
       ) {
         init.flyToExtent(v.id);
