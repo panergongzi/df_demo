@@ -14,7 +14,7 @@
       v-model="showPop"
       :mask="false"
       :lock-view="false"
-      title="基本信息"
+      title="门架基本信息"
       :position="{ left: 320, top: 100 }"
     >
       <template #default>
@@ -25,9 +25,13 @@
             ETC序列号：{{ selectedMj.coor[0] }}
             {{ selectedMj.ETC["设备信息"]["序列号"] }}
           </div>
-          <div style="color:#ffb300">拥堵指数:{{ selectedMj["拥堵指数"] }}</div>
-          <div style="color:yellowgreen">流量指数:{{ selectedMj["流量指数"] }}</div>
-          <div style="color:red">阻断指数:{{ selectedMj["阻断指数"] }}</div>
+          <div style="color: #ffb300">
+            拥堵指数:{{ selectedMj["拥堵指数"] }}
+          </div>
+          <div style="color: yellowgreen">
+            流量指数:{{ selectedMj["流量指数"] }}
+          </div>
+          <div style="color: red">阻断指数:{{ selectedMj["阻断指数"] }}</div>
           <div>
             摄像枪：{{ selectedMj.ETC["摄像头"] }}
             <el-button
@@ -37,6 +41,20 @@
               >地图投射</el-button
             >
           </div>
+        </div>
+      </template>
+    </vxe-modal>
+    <vxe-modal
+      v-model="showSFDY"
+      :mask="false"
+      :lock-view="false"
+      title="收费单元"
+      :position="{ left: 320, top: 100 }"
+    >
+      <template #default>
+        <div>
+          <div>收费名称：{{ selectedSFDY.name }}</div>
+          <div>坐标：{{ selectedSFDY.coor[0] }} {{ selectedSFDY.coor[1] }}</div>
         </div>
       </template>
     </vxe-modal>
@@ -72,7 +90,9 @@ export default {
     return {
       mjData,
       showPop: false,
+      showSFDY: false,
       selectedMj: {},
+      selectedSFDY: {},
       sfdyData,
     };
   },
@@ -91,7 +111,7 @@ export default {
         let coor = arr[l].coor;
         let point = Cesium.Cartesian3.fromDegrees(coor[0], coor[1], coor[2]);
         let popup = new tqsdk.popup.HeightPopup(
-          { position: point, height: 40, id: "XXSSS" + l },
+          { position: point, height: 1, id: "XXSSS" + l },
           {
             label: {
               text: arr[l].name,
@@ -102,6 +122,8 @@ export default {
               ),
               pixelOffset: new Cesium.Cartesian2(0, -50),
               backgroundColor: Cesium.Color.fromCssColorString("green"),
+              showBackground: false,
+              fillColor: Cesium.Color.fromCssColorString("#000"),
             },
             billboard: {
               image: "./img/2-2.png",
@@ -122,7 +144,7 @@ export default {
                 0,
                 1e4
               ),
-              show: true,
+              show: false,
             },
           }
         );
@@ -136,7 +158,7 @@ export default {
         let coor = arr[l].coor;
         let point = Cesium.Cartesian3.fromDegrees(coor[0], coor[1], coor[2]);
         let popup = new tqsdk.popup.HeightPopup(
-          { position: point, height: 40, id: arr[l].id + l },
+          { position: point, height: 1, id: arr[l].id + l },
           {
             label: {
               text: arr[l].name,
@@ -147,6 +169,8 @@ export default {
               ),
               pixelOffset: new Cesium.Cartesian2(0, -50),
               backgroundColor: Cesium.Color.fromCssColorString("green"),
+              showBackground: false,
+              fillColor: Cesium.Color.fromCssColorString("red"),
             },
             billboard: {
               image: "./img/2-3.png",
@@ -167,7 +191,7 @@ export default {
                 0,
                 1e4
               ),
-              show: true,
+              show: false,
             },
           }
         );
@@ -203,7 +227,10 @@ export default {
       }, 1000);
       videoMergeList[id] = tcamera;
     },
-    clickSFDY() {},
+    clickSFDY(v) {
+      this.showSFDY = true;
+      this.selectedSFDY = v;
+    },
   },
 };
 </script>
