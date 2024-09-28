@@ -76,7 +76,7 @@ export default {
         init.flyToExtent(v.id);
       } else {
         let center = v.center;
-        tqsdk.camera.flyTo(viewer, {
+        tqsdk.camera.setCamera(viewer, {
           position: Cesium.Cartesian3.fromDegrees(
             center[0],
             center[1],

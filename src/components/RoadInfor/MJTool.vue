@@ -110,45 +110,66 @@ export default {
         //判断是否无几何数据
         let coor = arr[l].coor;
         let point = Cesium.Cartesian3.fromDegrees(coor[0], coor[1], coor[2]);
-        let popup = new tqsdk.popup.HeightPopup(
-          { position: point, height: 1, id: "XXSSS" + l },
-          {
-            label: {
-              text: arr[l].name,
-              font: "14pt monospace",
-              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-                0,
-                1e6
-              ),
-              pixelOffset: new Cesium.Cartesian2(0, -50),
-              backgroundColor: Cesium.Color.fromCssColorString("green"),
-              showBackground: false,
-              fillColor: Cesium.Color.fromCssColorString("#000"),
-            },
-            billboard: {
-              image: "./img/2-2.png",
-              disableDepthTestDistance: 1e11,
-              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-                0,
-                1e7
-              ),
-              scaleByDistance: new Cesium.NearFarScalar(0, 1, 1e6, 0.5),
-              width: 82,
-              height: 48,
-              pixelOffset: new Cesium.Cartesian2(12, 0),
-              type: "Image",
-            },
-            verticalLine: {
-              material: Cesium.Color.fromCssColorString("#E27F21"),
-              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-                0,
-                1e4
-              ),
-              show: false,
-            },
-          }
-        );
-        let entity = window.viewer.entities.add(popup.entitys[0]);
+        // let popup = new tqsdk.popup.HeightPopup(
+        //   { position: point, height: 1, id: "XXSSS" + l },
+        //   {
+        //     label: {
+        //       text: arr[l].name,
+        //       font: "14pt monospace",
+        //       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+        //         0,
+        //         1e6
+        //       ),
+        //       pixelOffset: new Cesium.Cartesian2(0, -50),
+        //       backgroundColor: Cesium.Color.fromCssColorString("green"),
+        //       showBackground: false,
+        //       fillColor: Cesium.Color.fromCssColorString("#000"),
+        //     },
+        //     billboard: {
+        //       image: "./img/2-2.png",
+        //       disableDepthTestDistance: 1e11,
+        //       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+        //         0,
+        //         1e7
+        //       ),
+        //       scaleByDistance: new Cesium.NearFarScalar(0, 1, 1e6, 0.5),
+        //       width: 82,
+        //       height: 48,
+        //       pixelOffset: new Cesium.Cartesian2(12, 0),
+        //       type: "Image",
+        //     },
+        //     verticalLine: {
+        //       material: Cesium.Color.fromCssColorString("#E27F21"),
+        //       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+        //         0,
+        //         1e4
+        //       ),
+        //       show: false,
+        //     },
+        //   }
+        // );
+        // let entity = window.viewer.entities.add(popup.entitys[0]);
+        let entity = viewer.entities.add({
+          position: point,
+          label: {
+            text: arr[l].name,
+            font: "14pt monospace",
+            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+              0,
+              1e6
+            ),
+            fillColor: Cesium.Color.fromCssColorString("#000"),
+            // backgroundColor: Cesium.Color.fromCssColorString("#000"),
+            showBackground: false,
+            disableDepthTestDistance: Number.MAX_VALUE,
+            pixelOffset: new Cesium.Cartesian2(0, -30),
+          },
+          point: {
+            pixelSize: 10,
+            color: Cesium.Color.fromCssColorString("#000"),
+            disableDepthTestDistance: Number.MAX_VALUE,
+          },
+        });
       }
     },
     addSFDY(arr) {
@@ -157,56 +178,78 @@ export default {
         //判断是否无几何数据
         let coor = arr[l].coor;
         let point = Cesium.Cartesian3.fromDegrees(coor[0], coor[1], coor[2]);
-        let popup = new tqsdk.popup.HeightPopup(
-          { position: point, height: 1, id: arr[l].id + l },
-          {
-            label: {
-              text: arr[l].name,
-              font: "14pt monospace",
-              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-                0,
-                1e6
-              ),
-              pixelOffset: new Cesium.Cartesian2(0, -50),
-              backgroundColor: Cesium.Color.fromCssColorString("green"),
-              showBackground: false,
-              fillColor: Cesium.Color.fromCssColorString("red"),
-            },
-            billboard: {
-              image: "./img/2-3.png",
-              disableDepthTestDistance: 1e11,
-              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-                0,
-                1e7
-              ),
-              scaleByDistance: new Cesium.NearFarScalar(0, 1, 1e6, 0.5),
-              width: 48,
-              height: 48,
-              pixelOffset: new Cesium.Cartesian2(0, 0),
-              type: "Image",
-            },
-            verticalLine: {
-              material: Cesium.Color.fromCssColorString("#E27F21"),
-              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-                0,
-                1e4
-              ),
-              show: false,
-            },
-          }
-        );
-        let entity = window.viewer.entities.add(popup.entitys[0]);
+        // let popup = new tqsdk.popup.HeightPopup(
+        //   { position: point, height: 1, id: arr[l].id + l },
+        //   {
+        //     label: {
+        //       text: arr[l].name,
+        //       font: "14pt monospace",
+        //       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+        //         0,
+        //         1e6
+        //       ),
+        //       pixelOffset: new Cesium.Cartesian2(0, -50),
+        //       backgroundColor: Cesium.Color.fromCssColorString("green"),
+        //       showBackground: false,
+        //       fillColor: Cesium.Color.fromCssColorString("red"),
+        //     },
+        //     billboard: {
+        //       image: "./img/2-3.png",
+        //       disableDepthTestDistance: 1e11,
+        //       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+        //         0,
+        //         1e7
+        //       ),
+        //       scaleByDistance: new Cesium.NearFarScalar(0, 1, 1e6, 0.5),
+        //       width: 48,
+        //       height: 48,
+        //       pixelOffset: new Cesium.Cartesian2(0, 0),
+        //       type: "Image",
+        //     },
+        //     verticalLine: {
+        //       material: Cesium.Color.fromCssColorString("#E27F21"),
+        //       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+        //         0,
+        //         1e4
+        //       ),
+        //       show: false,
+        //     },
+        //   }
+        // );
+        // let entity = window.viewer.entities.add(popup.entitys[0]);
+        let entity = viewer.entities.add({
+          position: point,
+          label: {
+            text: arr[l].name,
+            font: "15pt monospace",
+            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+              0,
+              1e6
+            ),
+            fillColor: Cesium.Color.fromCssColorString("red"),
+            // backgroundColor: Cesium.Color.fromCssColorString("#000"),
+            showBackground: false,
+            disableDepthTestDistance: Number.MAX_VALUE,
+            pixelOffset: new Cesium.Cartesian2(0, -50),
+          },
+          point: {
+            pixelSize: 10,
+            color: Cesium.Color.fromCssColorString("red"),
+            disableDepthTestDistance: Number.MAX_VALUE,
+          },
+        });
       }
     },
     clickMj(v) {
       let center = v.coor;
-      tqsdk.camera.flyTo(viewer, {
+      tqsdk.camera.setCamera(viewer, {
         position: Cesium.Cartesian3.fromDegrees(
           center[0],
           center[1],
           center[2] + 100
         ),
       });
+      this.showSFDY = false;
       this.showPop = true;
       this.selectedMj = v;
     },
@@ -228,8 +271,17 @@ export default {
       videoMergeList[id] = tcamera;
     },
     clickSFDY(v) {
+      this.showPop = false;
       this.showSFDY = true;
       this.selectedSFDY = v;
+      let center = v.coor;
+      tqsdk.camera.setCamera(viewer, {
+        position: Cesium.Cartesian3.fromDegrees(
+          center[0],
+          center[1],
+          center[2] + 100
+        ),
+      });
     },
   },
 };

@@ -31,7 +31,22 @@
 import MJNode from "@/components/RoadInfor/MJTool.vue";
 import ETCInfor from "./ETCInfor.vue";
 import Search from "./Search.vue";
+let viewPoint = {
+  position: {
+    x: -2287862.462134481,
+    y: 5416080.480403744,
+    z: 2474562.649991016,
+  },
+  heading: 6.2625810081116535,
+  pitch: -0.7739710246618308,
+  roll: 0.00007980210181290914,
+};
 export default {
+  mounted() {
+    this.$nextTick(() => {
+      tqsdk.camera.setCamera(viewer, viewPoint);
+    });
+  },
   components: {
     MJNode,
     ETCInfor,

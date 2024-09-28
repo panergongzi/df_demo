@@ -1,8 +1,8 @@
 let list = [
   {
     id: "G150144003011020040",
-    name: "门架-HJK34FA0B",
-    hex: "HJK34FA0B",
+    name: "门架-HJK34FA0X",
+    hex: "HJK34FA0X",
     stakeMark: "k119+990",
     coor: [112.90175287, 22.98586574, 0],
     拥堵指数: 0.6,

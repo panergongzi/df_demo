@@ -118,7 +118,7 @@ export default {
       if (this.selectLayer.datatype === "threeDTile") {
         window.viewer.flyTo(this.selectLayer.ly);
       } else if (this.selectLayer.datatype === "dom") {
-        window.viewer.camera.flyTo({
+        window.viewer.camera.setCamera({
           destination: Cesium.Cartesian3.fromDegrees(
             111.376399,
             22.496896,

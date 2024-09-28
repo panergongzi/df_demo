@@ -5,10 +5,10 @@ let plottingList = [
     icon: "./img/1.png",
     style: {
       point: {
-        pixelSize: 12,
-        color: "red",
-        outlineColor: "#ffffff",
-        outlineWidth: 2,
+        pixelSize: 10,
+        color: "green",
+        // outlineColor: "#ffffff",
+        // outlineWidth: 2,
         disableDepthTestDistance: 1e11,
         distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 1e7),
       },
@@ -44,8 +44,8 @@ let plottingList = [
         // material: "#EEE06C",
         width: 5,
         // depthFailMaterial: "#EEE06C",
-        color: "red",
-        depthFailColor: "red",
+        color: "green",
+        depthFailColor: "green",
         clampToGround: true, //贴地
         close: false,
         type: "Color", //材质类型
@@ -61,14 +61,14 @@ let plottingList = [
     icon: "./img/3.png",
     style: {
       polygon: {
-        color: "red",
+        color: "green",
         type: "Color",
         // image: "/img/Fire.gif",
         // type: "Gif",
         fill: true,
         show: true,
         distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 1e7),
-        alpha: 0.8,
+        alpha: 0.5,
       },
       endpoint: {
         pixelSize: 12,

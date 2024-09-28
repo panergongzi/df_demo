@@ -183,7 +183,7 @@ export default {
 }
 .item-body {
   display: inline-block;
-  margin: 0 10px;
+  margin: 0 4px;
 }
 .mosu-tool-t {
   position: absolute;
@@ -196,7 +196,7 @@ export default {
     color: #fff;
     /* left: 300px; */
     right: 0px;
-    width: 520px;
+    width: 414px;
     overflow: hidden;
     border: 1px solid #379719;
     text-align: center;

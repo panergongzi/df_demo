@@ -1,10 +1,19 @@
 <template>
   <div>
-    <div>
+    <div class="item-p">
       <p>在地图上绘制规划行车路线</p>
-      <a-button type="primary" class="design-btn" @click="drawCarRoute"
+      <div>
+        <p
+          v-for="(item, index) in drivePath"
+          :key="index"
+          @click="changeDrive(item)"
+        >
+          驾驶路线{{ index + 1 }}
+        </p>
+      </div>
+      <!-- <a-button type="primary" class="design-btn" @click="drawCarRoute"
         >行车路线</a-button
-      >
+      > -->
       <el-button
         type="danger"
         icon="el-icon-delete"
@@ -13,7 +22,7 @@
         size="small"
       ></el-button>
     </div>
-    <div>
+    <div  class="item-p">
       <el-select
         v-model="viewValue"
         placeholder="切换视角"
@@ -32,7 +41,7 @@
 </template>
 <script>
 import linString from "@/data/line.js";
-
+import drivePath from "@/data/drivePath.js";
 let init;
 export default {
   data() {
@@ -50,6 +59,7 @@ export default {
           label: "第三视角",
         },
       ],
+      drivePath,
     };
   },
   mounted() {
@@ -68,6 +78,12 @@ export default {
     }
   },
   methods: {
+    changeDrive(v) {
+      let positions = v.map(
+        (item) => new Cesium.Cartesian3(item.x, item.y, item.z)
+      );
+      this.addAnimation(positions);
+    },
     //路线
     openCarRoad() {
       let positions = this.lineData.map((item) =>
@@ -166,6 +182,7 @@ export default {
         },
       });
       this.addAnimation(positions);
+      console.log("行车路线", JSON.stringify(positions));
     },
     addAnimation(positions) {
       let params = {
@@ -260,8 +277,11 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .design-btn {
   margin: 5px 8px;
+}
+.item-p{
+  margin-bottom: 10px;
 }
 </style>
