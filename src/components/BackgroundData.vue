@@ -57,6 +57,16 @@ export default {
         let data = await init.addCustomTileLayer(item, state);
       } else if (type == "designVector") {
         let data = await init.addKML(item, state);
+        console.log(666666, data.ly);
+        let len = data.ly._entityCollection._entities._array.length;
+        for (let i = 0; i < len; i++) {
+          let yy = data.ly._entityCollection._entities._array[i];
+          if (yy.label) {
+            yy.label.font = "11px sans-serif";
+            yy.label.disableDepthTestDistance = Number.MAX_VALUE;
+            yy.label.distanceDisplayCondition= new Cesium.DistanceDisplayCondition(0, 3e4)
+          }
+        }
       } else if (type == "designRaster") {
         let data = await init.addCustomTileLayer(item, state);
       } else {

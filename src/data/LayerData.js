@@ -30,7 +30,7 @@ let list = [
     center: [113.401134, 22.70118805, 113.63540833, 22.8085079],
     info: {
       //url: "http://192.168.2.85/test/CAD%E7%9F%A2%E9%87%8F%E6%95%B0%E6%8D%AE/%E9%BB%84%E6%9D%91%E4%BA%92%E9%80%9A84.kml",
-      url: "http://localhost/test/kml/%E9%84%82%E5%B0%94%E5%A4%9A%E6%96%AF%E5%8C%BA%E5%9F%9F/%E5%BA%B7%E5%B7%B4%E4%BB%80%E5%8C%BA%E8%A1%97%E9%81%93.kml",
+      url: "http://192.168.2.85/test/kml/%E5%85%A8%E7%81%8C%E6%A1%A9%E5%8F%B7%E7%BA%BF.kml",
     },
     //调节图层是色调，饱和度，亮度，对比度等
     colorAdjust: null,
@@ -67,11 +67,31 @@ let list = [
     thumbnail: null,
     center: [113.401134, 22.70118805, 100],
     info: {
-      url: "http://192.168.2.85/test/%E5%80%BE%E6%96%9C%E6%91%84%E5%BD%B1/%E5%AE%9E%E6%99%AF%E4%B8%89%E7%BB%B4/%E4%B8%9C%E6%B6%8C%E4%BA%92%E9%80%9A%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1/models/pc/0/terra_b3dms/tileset.json",
-      maximumScreenSpaceError: 16,
+      url: "http://192.168.2.85/test/%E9%A1%B9%E7%9B%AE/%E5%8D%97%E4%BA%8C%E7%8E%AF/%E6%B5%B7%E9%B8%A5%E5%B2%9B/terra_b3dms/tileset.json",
+      maximumScreenSpaceError: 1,
     },
     //调节图层是色调，饱和度，亮度，对比度等
     colorAdjust: null,
+    expansion: JSON.stringify({
+      transform: {
+        0: 1,
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 1,
+        6: 0,
+        7: 0,
+        8: 0,
+        9: 0,
+        10: 1,
+        11: 0,
+        12: 0,
+        13: 10,
+        14: 0,
+        15: 1,
+      },
+    }),
   },
   {
     label: "桥梁点云",

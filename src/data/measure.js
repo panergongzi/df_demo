@@ -13,9 +13,9 @@ let measureToolList = [
         show: false,
       },
       polyline: {
-        material: Cesium.Color.fromCssColorString("green"),
+        material: Cesium.Color.fromCssColorString("red"),
         width: 5,
-        depthFailMaterial: Cesium.Color.fromCssColorString("green"),
+        depthFailMaterial: Cesium.Color.fromCssColorString("red"),
         distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 1e7),
         clampToGround: true, //开启贴地
       },
@@ -94,10 +94,11 @@ let measureToolList = [
         font: "14px sans-serif",
         pixelOffset: new Cesium.Cartesian2(0, -30),
         disableDepthTestDistance: Number.MAX_VALUE,
-        showBackground: true,
+        showBackground: false,
         backgroundColor: Cesium.Color.fromCssColorString("#04A4B4"),
         scaleByDistance: new Cesium.NearFarScalar(0, 1, 1e6, 0.5),
         distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 5e4),
+        fillColor: Cesium.Color.fromCssColorString("red"),
       },
       polygon: {
         material: Cesium.Color.YELLOW.withAlpha(0.4),
