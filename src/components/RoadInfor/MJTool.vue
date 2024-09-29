@@ -68,7 +68,6 @@ import sfdyData from "@/data/sfdy.js";
 const videoData = {
   id: "xxxxx3eeeee",
   url: window.YANSSHIURL.video,
-  //url: "http://192.168.2.85/test/img/0786ba5d918aaf8f72dfefde13ceb25b.mp4",
   alpha: 1,
   heading: -19.8,
   pitch: -90,

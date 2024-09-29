@@ -9,8 +9,6 @@ let list = [
     center: [113.22024104, 23.97970104, 1000],
     info: {
       url: window.YANSSHIURL.dom,
-      //url: "http://192.168.2.85/test/%E9%A1%B9%E7%9B%AE/%E5%B9%BF%E4%B9%90%E9%AB%98%E9%80%9F/%E9%BB%8E%E6%BA%AA%E6%9C%8D%E5%8A%A1%E5%8C%BA%E5%88%87%E7%89%87/{z}/{x}/{y}.png",
-      //tilingScheme:"geographic",
       maximumLevel: 20,
     },
     //调节图层是色调，饱和度，亮度，对比度等
@@ -29,8 +27,6 @@ let list = [
     center: [113.401134, 22.70118805, 113.63540833, 22.8085079],
     info: {
       url: window.YANSSHIURL.cad,
-      //url: "http://192.168.2.85/test/CAD%E7%9F%A2%E9%87%8F%E6%95%B0%E6%8D%AE/%E9%BB%84%E6%9D%91%E4%BA%92%E9%80%9A84.kml",
-      //url: "http://192.168.2.85/test/kml/%E5%85%A8%E7%81%8C%E6%A1%A9%E5%8F%B7%E7%BA%BF.kml",
     },
     //调节图层是色调，饱和度，亮度，对比度等
     colorAdjust: null,
@@ -49,7 +45,7 @@ let list = [
   //     thumbnail: null,
   //     center: [113.401134, 22.70118805, 100],
   //     info: {
-  //       url: "http://192.168.2.85/test/%E6%AD%A3%E5%B0%84%E5%BD%B1%E5%83%8F/%E6%B3%A5%E5%B7%9E%E6%B0%B4%E9%81%93%E6%A1%A5/map/{z}/{x}/{y}.png",
+  //url: window.YANSSHIURL.cad,
   //       maximumLevel: 20,
   //     },
   //     //调节图层是色调，饱和度，亮度，对比度等
@@ -65,10 +61,9 @@ let list = [
     isShow: false,
     userId: "a4785bfe-7498-4a40-8f70-fadbad304729",
     thumbnail: null,
-    center: [113.53618944, 22.88957360, 1000],
+    center: [113.53618944, 22.8895736, 1000],
     info: {
       url: window.YANSSHIURL.tiles,
-      //url: "http://192.168.2.85/test/%E9%A1%B9%E7%9B%AE/%E5%8D%97%E4%BA%8C%E7%8E%AF/%E6%B5%B7%E9%B8%A5%E5%B2%9B/terra_b3dms/tileset.json",
       maximumScreenSpaceError: 1,
     },
     //调节图层是色调，饱和度，亮度，对比度等
@@ -104,7 +99,6 @@ let list = [
     center: [124.73202766, 45.19260848, 180],
     info: {
       url: window.YANSSHIURL.dy,
-      //url: "http://192.168.2.85/test/%E9%A1%B9%E7%9B%AE/%E5%90%89%E6%9E%97/terra_pnts/tileset.json",
       maximumScreenSpaceError: 1,
     },
     //调节图层是色调，饱和度，亮度，对比度等
