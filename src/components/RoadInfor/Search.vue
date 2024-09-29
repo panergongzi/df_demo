@@ -219,7 +219,7 @@ export default {
         let positions = [point1, point2];
         let path = featureCollection.addEntity({
           polyline: {
-            material: Cesium.Color.fromCssColorString("yellow"),
+            material: Cesium.Color.fromCssColorString("#d11896"),
             width: 8,
             // depthFailMaterial: Cesium.Color.YELLOW,
             positions,
