@@ -96,7 +96,7 @@ let list = [
     isShow: false,
     userId: "a4785bfe-7498-4a40-8f70-fadbad30472955332",
     thumbnail: null,
-    center: [124.73202766, 45.19260848, 180],
+    center: [124.73608394, 45.19692967, 300],
     info: {
       url: window.YANSSHIURL.dy,
       maximumScreenSpaceError: 1,

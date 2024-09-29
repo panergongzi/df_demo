@@ -47,6 +47,7 @@ export default {
       let type = item.type;
       // 加载实景三维
       if (type == "threeDTile" || type == "bim" || type == "threeDPoint") {
+        //if (type == "bim" || type == "threeDPoint") {
         let data = await init.add3dtiles(item, state);
       } else if (type == "terrain") {
         await init.addTerrain(item, state);
@@ -64,13 +65,14 @@ export default {
           if (yy.label) {
             yy.label.font = "11px sans-serif";
             yy.label.disableDepthTestDistance = Number.MAX_VALUE;
-            yy.label.distanceDisplayCondition= new Cesium.DistanceDisplayCondition(0, 3e4)
+            yy.label.distanceDisplayCondition =
+              new Cesium.DistanceDisplayCondition(0, 3e4);
           }
         }
       } else if (type == "designRaster") {
         let data = await init.addCustomTileLayer(item, state);
       } else {
-        let data = await init.add3dtiles(item, state);
+        //let data = await init.add3dtiles(item, state);
       }
     },
     //定位到数据范围

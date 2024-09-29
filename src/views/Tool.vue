@@ -259,7 +259,7 @@ let modelLayer = {
   center: [113.401134, 22.70118805, 100],
   info: {
     url: window.YANSSHIURL.tiles,
-     maximumScreenSpaceError: 1,
+    maximumScreenSpaceError: 1,
   },
   //调节图层是色调，饱和度，亮度，对比度等
   colorAdjust: null,
@@ -285,6 +285,7 @@ let modelLayer = {
   }),
 };
 let backgroundData;
+let indexModel = undefined;
 export default {
   data() {
     return {
@@ -319,7 +320,17 @@ export default {
     });
   },
   methods: {
-    handleClick() {},
+    handleClick() {
+      if (this.activeName === "BackgroundData") {
+        if (indexModel) {
+          indexModel.show = false;
+        }
+      } else {
+        if (indexModel) {
+          indexModel.show = true;
+        }
+      }
+    },
     //导出图片
     async exportImg() {
       let thumbnailBase64 = await tqsdk.utils.screenShot.canvasToBase64(
@@ -333,7 +344,7 @@ export default {
         mimeType: "image/jpeg",
       });
       let blob = tqsdk.utils.fileFonversion.base64ToBlob(thumbnailBase64);
-      tqsdk.utils.download.downloadJson(blob, "演示下载","jpg");
+      tqsdk.utils.download.downloadJson(blob, "演示下载", "jpg");
     },
     downloadIamge(imgsrc, name) {
       //下载图片地址和图片名
@@ -448,6 +459,7 @@ export default {
       }
       let data = await backgroundData.add3dtiles(modelLayer, true);
       // viewer.flyTo(data.ly);
+      indexModel = data.ly;
     },
   },
 };
