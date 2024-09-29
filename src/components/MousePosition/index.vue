@@ -200,5 +200,6 @@ export default {
     overflow: hidden;
     border: 1px solid #379719;
     text-align: center;
+    pointer-events: none;
 }
 </style>

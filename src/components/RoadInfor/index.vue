@@ -12,7 +12,7 @@
       </el-date-picker>
     </div> -->
     <div class="tt-line">
-      <el-collapse v-model="activeNames" @change="handleChange">
+      <el-collapse v-model="activeNames" @change="handleChange"  accordion>
         <el-collapse-item title="数据展示" name="1">
           <MJNode></MJNode>
         </el-collapse-item>
@@ -55,6 +55,7 @@ export default {
   data() {
     return {
       time1: [new Date(2024, 10, 1, 10, 10), new Date(2024, 10, 1, 12, 0)],
+      activeNames: "1",
     };
   },
   methods: {

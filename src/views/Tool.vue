@@ -418,7 +418,7 @@ export default {
         let entity = viewer.entities.add({
           position: point,
           label: {
-            text: "桩号："+arr[l].name,
+            text: "桩号-"+arr[l].name,
             font: "15pt monospace",
             distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
               0,
