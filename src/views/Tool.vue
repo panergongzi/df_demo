@@ -418,13 +418,13 @@ export default {
         let entity = viewer.entities.add({
           position: point,
           label: {
-            text: arr[l].name,
+            text: "桩号："+arr[l].name,
             font: "15pt monospace",
             distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
               0,
               1e6
             ),
-            fillColor: Cesium.Color.fromCssColorString("yellow"),
+            fillColor: Cesium.Color.fromCssColorString("blue"),
             // backgroundColor: Cesium.Color.fromCssColorString("#000"),
             showBackground: false,
             disableDepthTestDistance: Number.MAX_VALUE,
@@ -432,7 +432,7 @@ export default {
           },
           point: {
             pixelSize: 10,
-            color: Cesium.Color.fromCssColorString("yellow"),
+            color: Cesium.Color.fromCssColorString("blue"),
             disableDepthTestDistance: Number.MAX_VALUE,
           },
         });
