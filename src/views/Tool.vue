@@ -333,7 +333,7 @@ export default {
         mimeType: "image/jpeg",
       });
       let blob = tqsdk.utils.fileFonversion.base64ToBlob(thumbnailBase64);
-      tqsdk.utils.download.downloadJson(blob, "downloaded-image","jpg");
+      tqsdk.utils.download.downloadJson(blob, "演示下载","jpg");
     },
     downloadIamge(imgsrc, name) {
       //下载图片地址和图片名
