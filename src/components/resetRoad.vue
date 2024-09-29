@@ -224,6 +224,7 @@ export default {
         pathStyle: {
           material: Cesium.Color.RED,
           width: 4,
+          show:false,
         },
         entpointStyle: {
           polyline: {

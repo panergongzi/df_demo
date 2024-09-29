@@ -65,6 +65,11 @@ export default {
           tk: "eb1cfe728e083e5c189a4cd75a16d810",
         })
       );
+      layer.add(
+        tqsdk.layer.syTDTLayer.addVectorMakerLayer({
+          tk: "eb1cfe728e083e5c189a4cd75a16d810",
+        })
+      );
       //window.viewer.scene.screenSpaceCameraController.enableTilt = false; //禁止相机倾斜
     },
     importMeasuring(v) {
