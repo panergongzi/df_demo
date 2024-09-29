@@ -37,42 +37,8 @@ let toolList = measureToolList.map((item) => {
     icon: item.icon,
   };
 });
-let modelLayer = {
-  label: "高速公路倾斜模型",
-  type: "threeDTile",
-  id: "64d6de1a-9761-4dc7-a6f9-b71dd17771f44743",
-  isShow: false,
-  userId: "a4785bfe-7498-4a40-8f70-fadbad304729",
-  thumbnail: null,
-  center: [113.401134, 22.70118805, 100],
-  info: {
-    url: "http://192.168.2.85/test/%E9%A1%B9%E7%9B%AE/%E5%8D%97%E4%BA%8C%E7%8E%AF/%E6%B5%B7%E9%B8%A5%E5%B2%9B/terra_b3dms/tileset.json",
-    maximumScreenSpaceError: 1,
-  },
-  //调节图层是色调，饱和度，亮度，对比度等
-  colorAdjust: null,
-  expansion: JSON.stringify({
-    transform: {
-      0: 1,
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 1,
-      6: 0,
-      7: 0,
-      8: 0,
-      9: 0,
-      10: 1,
-      11: 0,
-      12: 0,
-      13: 10,
-      14: 0,
-      15: 1,
-    },
-  }),
-};
-let backgroundData;
+
+
 export default {
   data() {
     return {
@@ -100,7 +66,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       measureTool = new tqsdk.widgets.MeasureTool(window.viewer);
-      this.addModel();
+     
     });
   },
   destroyed() {
@@ -109,10 +75,7 @@ export default {
       measureTool = undefined;
     }
 
-    if (backgroundData) {
-      backgroundData.destroy();
-      backgroundData = undefined;
-    }
+  
   },
   methods: {
     async apply(v) {
@@ -174,13 +137,7 @@ export default {
       }
       this.type = "";
     },
-    async addModel() {
-      if (!backgroundData) {
-        backgroundData = new tqsdk.widgets.BackgroundData(viewer);
-      }
-      let data = await backgroundData.add3dtiles(modelLayer, true);
-      viewer.flyTo(data.ly);
-    },
+  
     downloadAll() {
       // measureTool.downloadAll();
     },

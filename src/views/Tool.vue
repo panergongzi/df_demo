@@ -248,6 +248,42 @@ let importD = {
     },
   ],
 };
+let modelLayer = {
+  label: "高速公路倾斜模型",
+  type: "threeDTile",
+  id: "64d6de1a-9761-4dc7-a6f9-b71dd17771f44743",
+  isShow: false,
+  userId: "a4785bfe-7498-4a40-8f70-fadbad304729",
+  thumbnail: null,
+  center: [113.401134, 22.70118805, 100],
+  info: {
+    url: "http://192.168.2.85/test/%E9%A1%B9%E7%9B%AE/%E5%8D%97%E4%BA%8C%E7%8E%AF/%E6%B5%B7%E9%B8%A5%E5%B2%9B/terra_b3dms/tileset.json",
+    maximumScreenSpaceError: 1,
+  },
+  //调节图层是色调，饱和度，亮度，对比度等
+  colorAdjust: null,
+  expansion: JSON.stringify({
+    transform: {
+      0: 1,
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 1,
+      6: 0,
+      7: 0,
+      8: 0,
+      9: 0,
+      10: 1,
+      11: 0,
+      12: 0,
+      13: 10,
+      14: 0,
+      15: 1,
+    },
+  }),
+};
+let backgroundData;
 export default {
   data() {
     return {
@@ -268,10 +304,17 @@ export default {
   beforeCreate() {
     this.ZDsID = [];
   },
+  beforeDestroy(){
+    if (backgroundData) {
+      backgroundData.destroy();
+      backgroundData = undefined;
+    }
+  },
   mounted() {
     this.$nextTick(() => {
       this.showZD(zhuangData);
       this.$refs.MousePositionNode.init(viewer);
+      this.addModel();
     });
   },
   methods: {
@@ -339,35 +382,7 @@ export default {
         //判断是否无几何数据
         let anchor = arr[l].anchor;
         let point = tqsdk.utils.wktTransition.toCartesian3Point(anchor);
-        let ID = "ZD_" + arr[l].id.toString();
-        // let popup = new tqsdk.popup.HeightPopup(
-        //   { position: point, height: 1, id: ID },
-        //   {
-        //     label: {
-        //       text: arr[l].name,
-        //       font: "15pt monospace",
-        //       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-        //         0,
-        //         1e6
-        //       ),
-        //       color: Cesium.Color.fromCssColorString("green"),
-        //       // backgroundColor: Cesium.Color.fromCssColorString("#000"),
-        //       showBackground: true,
-        //     },
-        //     verticalLine: {
-        //       material: new Cesium.PolylineDashMaterialProperty({
-        //         color: Cesium.Color.fromCssColorString("#E27F21"),
-        //         dashLength: 20,
-        //       }),
-        //       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-        //         0,
-        //         1e4
-        //       ),
-        //       show: false,
-        //     },
-        //   }
-        // );
-        // let entity = window.viewer.entities.add(popup.entitys[0]);
+        let ID = "ZD_" + arr[l].id.toString();       
         let entity = viewer.entities.add({
           position: point,
           label: {
@@ -377,7 +392,7 @@ export default {
               0,
               1e6
             ),
-            fillColor: Cesium.Color.fromCssColorString("green"),
+            fillColor: Cesium.Color.fromCssColorString("yellow"),
             // backgroundColor: Cesium.Color.fromCssColorString("#000"),
             showBackground: false,
             disableDepthTestDistance: Number.MAX_VALUE,
@@ -385,7 +400,7 @@ export default {
           },
           point: {
             pixelSize: 10,
-            color: Cesium.Color.fromCssColorString("green"),
+            color: Cesium.Color.fromCssColorString("yellow"),
             disableDepthTestDistance: Number.MAX_VALUE,
           },
         });
@@ -405,6 +420,13 @@ export default {
     exportData() {
       this.$refs.DrawTool.downloadAll();
       this.$refs.MeasureTool.downloadAll();
+    },
+    async addModel() {
+      if (!backgroundData) {
+        backgroundData = new tqsdk.widgets.BackgroundData(viewer);
+      }
+      let data = await backgroundData.add3dtiles(modelLayer, true);
+      // viewer.flyTo(data.ly);
     },
   },
 };

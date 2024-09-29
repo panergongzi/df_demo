@@ -8,7 +8,7 @@
           :key="index"
           @click="changeDrive(item)"
         >
-          驾驶路线{{ index + 1 }}
+          驾驶路线-东莞-惠州
         </p>
       </div>
       <!-- <a-button type="primary" class="design-btn" @click="drawCarRoute"
@@ -22,7 +22,7 @@
         size="small"
       ></el-button>
     </div>
-    <div  class="item-p">
+    <div class="item-p">
       <el-select
         v-model="viewValue"
         placeholder="切换视角"
@@ -43,6 +43,17 @@
 import linString from "@/data/line.js";
 import drivePath from "@/data/drivePath.js";
 let init;
+let viewPoint = {
+  position: {
+    x: -2347837.004036987,
+    y: 5390120.382140575,
+    z: 2465356.294094447,
+  },
+  heading: 6.250215308832361,
+  pitch: -0.9062938176092143,
+  roll: 6.283169045295165,
+};
+
 export default {
   data() {
     return {
@@ -65,6 +76,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       init = new tqsdk.widgets.DroneRoaming(window.viewer);
+      tqsdk.camera.setCamera(viewer, viewPoint);
     });
   },
   beforeCreate() {
@@ -78,7 +90,9 @@ export default {
     }
   },
   methods: {
+    //切换行车路线
     changeDrive(v) {
+      this.removeAll();
       let positions = v.map(
         (item) => new Cesium.Cartesian3(item.x, item.y, item.z)
       );
@@ -234,6 +248,20 @@ export default {
             show: false,
           },
         },
+        popupStyle: {
+          label: {
+            text: ``,
+            font: "13px Helvetica",
+            pixelOffset: new Cesium.Cartesian2(0, -40),
+            scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.0, 1e4, 0),
+            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+              0,
+              1e5
+            ),
+            showBackground: false,
+            backgroundColor: Cesium.Color.GREEN.withAlpha(0.5),
+          },
+        },
       };
       init.add(params);
       init.path.featureLayer.flyToEntitys();
@@ -281,7 +309,7 @@ export default {
 .design-btn {
   margin: 5px 8px;
 }
-.item-p{
+.item-p {
   margin-bottom: 10px;
 }
 </style>

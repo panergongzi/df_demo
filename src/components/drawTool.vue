@@ -22,7 +22,16 @@
 </template>
 <script>
 import configData from "@/data/draw.js";
-
+let viewPoint = {
+  position: {
+    x: -2347572.561030008,
+    y: 5389828.799335787,
+    z: 2465796.7730464297,
+  },
+  heading: 3.1798417438625712,
+  pitch: -0.45199883783141237,
+  roll: 6.283182134744745,
+};
 let platting;
 export default {
   data() {
@@ -36,6 +45,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       platting = new tqsdk.widgets.Plotting(window.viewer);
+      tqsdk.camera.setCamera(viewer, viewPoint);
     });
   },
   methods: {
