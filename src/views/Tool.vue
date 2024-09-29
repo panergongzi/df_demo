@@ -159,10 +159,11 @@ let importD = {
           polyline: {
             width: 5,
             color: "green",
-            depthFailColor: "red",
+            depthFailColor: "green",
             clampToGround: true,
             close: false,
-            type: "Color",
+            // type: "Color",
+            type: "PolylineDashMaterialProperty",
             distanceDisplayCondition: { _near: 0, _far: 10000000 },
             alpha: 1,
           },

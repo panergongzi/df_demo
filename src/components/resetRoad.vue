@@ -205,7 +205,7 @@ export default {
         positions: positions,
         animationType: 1,
         speedType: 0,
-        speed: 5, //速度
+        speed: 3, //速度
         name: "粤A0023", //车牌
         hpr: {
           heading: 0,

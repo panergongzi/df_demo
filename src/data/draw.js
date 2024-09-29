@@ -48,8 +48,8 @@ let plottingList = [
         depthFailColor: "green",
         clampToGround: true, //贴地
         close: false,
-        type: "Color", //材质类型
-        // type:"PolylineDashMaterialProperty",
+        //type: "Color", //材质类型
+        type: "PolylineDashMaterialProperty",
         distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 1e7),
         alpha: 1,
       },

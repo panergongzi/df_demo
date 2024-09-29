@@ -50,6 +50,7 @@ export default {
   },
   methods: {
     async drawPlottiing(item) {
+      item = JSON.parse(JSON.stringify(item));
       let { style, type } = item;
       if (platting[type] && typeof platting[type] === "function") {
         let re = await platting[type](style);
@@ -69,7 +70,18 @@ export default {
     async importData(v) {
       this.removeAllPlotting();
       let re = await platting.importJson(JSON.parse(v));
-      re.flyTo();
+      // re.flyTo();
+      let view = {
+        position: {
+          x: -2347389.567400413,
+          y: 5390024.423854526,
+          z: 2465430.027178755,
+        },
+        heading: 6.276318542229439,
+        pitch: -0.9976802495141719,
+        roll: 6.283184815527278,
+      };
+      tqsdk.camera.setCamera(viewer, view);
     },
     downloadAll() {
       platting.downloadAll("标绘数据", "txt");
