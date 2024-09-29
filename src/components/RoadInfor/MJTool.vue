@@ -16,6 +16,7 @@
       :lock-view="false"
       title="门架基本信息"
       :position="{ left: 320, top: 100 }"
+      @close="closeMJPop"
     >
       <template #default>
         <div>
@@ -282,6 +283,15 @@ export default {
           center[2] + 100
         ),
       });
+    },
+    closeMJPop() {
+      let keys = Object.keys(videoMergeList);
+      for (let i = 0; i < keys.length; i++) {
+        if (videoMergeList[keys[i]]) {
+          videoMergeList[keys[i]].destroy();
+          videoMergeList[keys[i]] = undefined;
+        }
+      }
     },
   },
 };
