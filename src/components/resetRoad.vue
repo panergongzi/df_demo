@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="item-p">
-      <p>选择行车路线</p>
+      <p >选择行车路线</p>
       <div>
         <p
           v-for="(item, index) in drivePath"
           :key="index"
           @click="changeDrive(item)"
         >
-          驾驶路段-东莞-惠州
+          <span style="color: blue;">驾驶路段-东莞-惠州</span>
         </p>
       </div>
       <!-- <a-button type="primary" class="design-btn" @click="drawCarRoute"
