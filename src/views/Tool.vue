@@ -258,7 +258,8 @@ let modelLayer = {
   thumbnail: null,
   center: [113.401134, 22.70118805, 100],
   info: {
-    url: "http://192.168.2.85/test/%E9%A1%B9%E7%9B%AE/%E5%8D%97%E4%BA%8C%E7%8E%AF/%E6%B5%B7%E9%B8%A5%E5%B2%9B/terra_b3dms/tileset.json",
+    url: window.YANSSHIURL.tiles,
+   // url: "http://192.168.2.85/test/%E9%A1%B9%E7%9B%AE/%E5%8D%97%E4%BA%8C%E7%8E%AF/%E6%B5%B7%E9%B8%A5%E5%B2%9B/terra_b3dms/tileset.json",
     maximumScreenSpaceError: 1,
   },
   //调节图层是色调，饱和度，亮度，对比度等

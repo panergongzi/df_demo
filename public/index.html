@@ -10,14 +10,25 @@
   </head>
   <body>
     <noscript>
-      <strong
-        >数据指标高精度数字底图图业融合应用研究与开发项目（演示）</strong
-      >
+      <strong>数据指标高精度数字底图图业融合应用研究与开发项目（演示）</strong>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+      //演示数据地址
+      const YANSSHIURL = {
+        dom: "http://192.168.2.85/test/%E9%A1%B9%E7%9B%AE/%E5%B9%BF%E4%B9%90%E9%AB%98%E9%80%9F/%E9%BB%8E%E6%BA%AA%E6%9C%8D%E5%8A%A1%E5%8C%BA%E5%88%87%E7%89%87/{z}/{x}/{y}.png", //正射
+        terraim: "", //地形
+        dy: "http://192.168.2.85/test/%E9%A1%B9%E7%9B%AE/%E5%90%89%E6%9E%97/terra_pnts/tileset.json", //点云
+        tiles:
+          "http://192.168.2.85/test/%E9%A1%B9%E7%9B%AE/%E5%8D%97%E4%BA%8C%E7%8E%AF/%E6%B5%B7%E9%B8%A5%E5%B2%9B/terra_b3dms/tileset.json", //三维模型
+        video:
+          "http://192.168.2.85/test/img/0786ba5d918aaf8f72dfefde13ceb25b.mp4", //视频
+        cad: "http://192.168.2.85/test/kml/%E5%85%A8%E7%81%8C%E6%A1%A9%E5%8F%B7%E7%BA%BF.kml",
+      };
+      window.YANSSHIURL = YANSSHIURL;
+    </script>
     <script src="./Cesium//Cesium.js"></script>
-
     <script src="./sdk/tqEngine-1.0.2.min.js"></script>
   </body>
 </html>
