@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="item-p">
-      <p >选择行车路线</p>
+      <p>选择行车路线</p>
       <div>
         <p
           v-for="(item, index) in drivePath"
           :key="index"
           @click="changeDrive(item)"
         >
-          <span style="color: blue;">驾驶路段-东莞-惠州</span>
+          <span style="color: blue">驾驶路段-东莞-惠州</span>
         </p>
       </div>
       <!-- <a-button type="primary" class="design-btn" @click="drawCarRoute"
@@ -53,7 +53,20 @@ let viewPoint = {
   pitch: -0.9062938176092143,
   roll: 6.283169045295165,
 };
-
+let markIcons = [
+  {
+    name: "收费门架1号-东莞-惠州",
+    coor: [113.53088041, 22.88840109, 0],
+  },
+  {
+    name: "收费门架2号-东莞-惠州",
+    coor: [113.53664814, 22.889414444, 50],
+  },
+  {
+    name: "收费门架3号-东莞-惠州",
+    coor: [113.54738058, 22.88807333, 0],
+  },
+];
 export default {
   data() {
     return {
@@ -77,6 +90,7 @@ export default {
     this.$nextTick(() => {
       init = new tqsdk.widgets.DroneRoaming(window.viewer);
       tqsdk.camera.setCamera(viewer, viewPoint);
+      this.openCarRoad();
     });
   },
   beforeCreate() {
@@ -100,8 +114,8 @@ export default {
     },
     //路线
     openCarRoad() {
-      let positions = this.lineData.map((item) =>
-        Cesium.Cartesian3.fromDegrees(item[0], item[1], item[2])
+      let positions = drivePath[0].map(
+        (item) => new Cesium.Cartesian3(item.x, item.y, item.z)
       );
       const line = viewer.entities.add({
         polyline: {
@@ -110,58 +124,81 @@ export default {
           width: 5,
         },
       });
-      viewer.zoomTo(line);
-
-      const lableData = [
-        {
-          id: 100,
-          name: "起点",
-          anchor: "POINT(112.8793658969 22.0180811407)",
-        },
-        {
-          id: 101,
-          name: "终点",
-          anchor: "POINT(113.0311272839 22.0002253674)",
-        },
-      ];
-      this.ZDsID = [];
-      let entityArr = [];
-      //循环遍历每一个桩点对象
-      for (let l = 0; l < lableData.length; l++) {
-        //初始化
-        //判断是否无几何数据
-        let anchor = lableData[l].anchor;
-        let point = tqsdk.utils.wktTransition.toCartesian3Point(anchor);
-        let ID = "ZD_" + lableData[l].id.toString();
-        let popup = new tqsdk.popup.HeightPopup(
-          { position: point, height: 180, id: ID },
-          {
-            label: {
-              text: lableData[l].name,
-              font: "20pt monospace",
-              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-                0,
-                1e6
-              ),
-              backgroundColor: Cesium.Color.fromCssColorString("red"),
-            },
-            verticalLine: {
-              material: new Cesium.PolylineDashMaterialProperty({
-                color: Cesium.Color.fromCssColorString("#E27F21"),
-                dashLength: 20,
-              }),
-              distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
-                0,
-                1e4
-              ),
-            },
-          }
+      markIcons.map((item) => {
+        let position = Cesium.Cartesian3.fromDegrees(
+          item.coor[0],
+          item.coor[1],
+          item.coor[2]
         );
-        let entity = window.viewer.entities.add(popup.entitys[0]);
-        //存入管理数据
-        this.ZDsID.push(ID);
-        entityArr.push(entity);
-      }
+        const entity = viewer.entities.add({
+          position,
+          label: {
+            text: item.name,
+            font: "15pt monospace",
+            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+              0,
+              1e6
+            ),
+            fillColor: Cesium.Color.fromCssColorString("red"),
+            // backgroundColor: Cesium.Color.fromCssColorString("#000"),
+            showBackground: false,
+            disableDepthTestDistance: Number.MAX_VALUE,
+            pixelOffset: new Cesium.Cartesian2(0, -15),
+          },
+        });
+      });
+      // viewer.zoomTo(line);
+
+      // const lableData = [
+      //   {
+      //     id: 100,
+      //     name: "起点",
+      //     anchor: "POINT(112.8793658969 22.0180811407)",
+      //   },
+      //   {
+      //     id: 101,
+      //     name: "终点",
+      //     anchor: "POINT(113.0311272839 22.0002253674)",
+      //   },
+      // ];
+      // this.ZDsID = [];
+      // let entityArr = [];
+      // //循环遍历每一个桩点对象
+      // for (let l = 0; l < lableData.length; l++) {
+      //   //初始化
+      //   //判断是否无几何数据
+      //   let anchor = lableData[l].anchor;
+      //   let point = tqsdk.utils.wktTransition.toCartesian3Point(anchor);
+      //   let ID = "ZD_" + lableData[l].id.toString();
+      //   let popup = new tqsdk.popup.HeightPopup(
+      //     { position: point, height: 180, id: ID },
+      //     {
+      //       label: {
+      //         text: lableData[l].name,
+      //         font: "20pt monospace",
+      //         distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+      //           0,
+      //           1e6
+      //         ),
+      //         backgroundColor: Cesium.Color.fromCssColorString("red"),
+      //       },
+      //       verticalLine: {
+      //         material: new Cesium.PolylineDashMaterialProperty({
+      //           color: Cesium.Color.fromCssColorString("#E27F21"),
+      //           dashLength: 20,
+      //         }),
+      //         distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+      //           0,
+      //           1e4
+      //         ),
+      //       },
+      //     }
+      //   );
+      //   let entity = window.viewer.entities.add(popup.entitys[0]);
+      //   //存入管理数据
+      //   this.ZDsID.push(ID);
+      //   entityArr.push(entity);
+      // }
     },
     async drawCarRoute() {
       let positions = await init.addLines({
@@ -224,7 +261,7 @@ export default {
         pathStyle: {
           material: Cesium.Color.RED,
           width: 4,
-          show:false,
+          show: false,
         },
         entpointStyle: {
           polyline: {
