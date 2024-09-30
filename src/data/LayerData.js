@@ -24,7 +24,7 @@ let list = [
     isShow: false,
     userId: "a4785bfe-7498-4a40-8f70-fadbad304729",
     thumbnail: null,
-    center: [113.401134, 22.70118805, 113.63540833, 22.8085079],
+    center: [111.10726426, 25.9320437,1000],
     info: {
       url: window.YANSSHIURL.cad,
     },

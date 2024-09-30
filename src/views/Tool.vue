@@ -440,7 +440,7 @@ export default {
         this.ZDsID.push(ID);
         entityArr.push(entity);
       }
-      window.viewer.flyTo(entityArr);
+      // window.viewer.flyTo(entityArr);
     },
     importData() {
       this.plottingPopupShow = true;

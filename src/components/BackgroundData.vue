@@ -78,24 +78,24 @@ export default {
     //定位到数据范围
     flyTo(v) {
       let type = v.type;
-      console.log(33333333333, type);
-      if (
-        // type == "threeDTile" ||
-        // type == "bim" ||
-        // type == "threeDPoint" ||
-        type == "designVector"
-      ) {
-        init.flyToExtent(v.id);
-      } else {
-        let center = v.center;
-        tqsdk.camera.setCamera(viewer, {
-          position: Cesium.Cartesian3.fromDegrees(
-            center[0],
-            center[1],
-            center[2]
-          ),
-        });
-      }
+      // console.log(33333333333, type);
+      // if (
+      //   // type == "threeDTile" ||
+      //   // type == "bim" ||
+      //   // type == "threeDPoint" ||
+      //   type == "designVector"
+      // ) {
+      //   init.flyToExtent(v.id);
+      // } else {
+      let center = v.center;
+      tqsdk.camera.setCamera(viewer, {
+        position: Cesium.Cartesian3.fromDegrees(
+          center[0],
+          center[1],
+          center[2]
+        ),
+      });
+      // }
     },
   },
 };

@@ -12,14 +12,23 @@
       </el-date-picker>
     </div> -->
     <div class="tt-line">
-      <el-collapse v-model="activeNames" @change="handleChange"  accordion>
-        <el-collapse-item title="数据展示" name="1">
+      <el-collapse v-model="activeNames" @change="handleChange" accordion>
+        <el-collapse-item name="1">
+          <template slot="title">
+            <i class="header-icon el-icon-info icon-tt"></i>数据展示
+          </template>
           <MJNode></MJNode>
         </el-collapse-item>
-        <el-collapse-item title="数据查询转换" name="2">
+        <el-collapse-item name="2">
+          <template slot="title">
+            <i class="header-icon el-icon-search icon-tt"></i>数据查询转换
+          </template>
           <Search ref="Search"></Search>
         </el-collapse-item>
-        <el-collapse-item title="ETC拥堵展示" name="3">
+        <el-collapse-item name="3">
+          <template slot="title">
+            <i class="header-icon el-icon-s-promotion icon-tt"></i>ETC拥堵展示
+          </template>
           <ETCInfor ref="ETCInfor"></ETCInfor>
         </el-collapse-item>
       </el-collapse>
@@ -32,14 +41,10 @@ import MJNode from "@/components/RoadInfor/MJTool.vue";
 import ETCInfor from "./ETCInfor.vue";
 import Search from "./Search.vue";
 let viewPoint = {
-  position: {
-    x: -2287862.462134481,
-    y: 5416080.480403744,
-    z: 2474562.649991016,
-  },
-  heading: 6.2625810081116535,
-  pitch: -0.7739710246618308,
-  roll: 0.00007980210181290914,
+  position: { x: -2288527.633595279, y: 5416701.680130981, z: 2479141.5121104 },
+  heading: 6.205986638440257,
+  pitch: -1.5194748924219752,
+  roll: 0.00016533437211396773,
 };
 export default {
   mounted() {
@@ -73,5 +78,8 @@ export default {
 }
 .tt-line {
   margin-bottom: 10px;
+}
+.icon-tt {
+  margin-right: 5px;
 }
 </style>

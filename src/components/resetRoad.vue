@@ -8,7 +8,7 @@
           :key="index"
           @click="changeDrive(item)"
         >
-          <span style="color: blue">驾驶路段-东莞-惠州</span>
+          <span style="color: blue">驾驶路段-广龙高速</span>
         </p>
       </div>
       <!-- <a-button type="primary" class="design-btn" @click="drawCarRoute"
@@ -45,26 +45,32 @@ import drivePath from "@/data/drivePath.js";
 let init;
 let viewPoint = {
   position: {
-    x: -2347837.004036987,
-    y: 5390120.382140575,
-    z: 2465356.294094447,
+    x: -2348965.4212853326,
+    y: 5391662.563247876,
+    z: 2464782.144144561,
   },
-  heading: 6.250215308832361,
-  pitch: -0.9062938176092143,
-  roll: 6.283169045295165,
+  heading: 6.250215308933214,
+  pitch: -0.9062938152133824,
+  roll: 6.283169045167003,
 };
 let markIcons = [
   {
-    name: "收费门架1号-东莞-惠州",
+    name: "收费门架1号-广龙高速",
     coor: [113.53088041, 22.88840109, 0],
   },
   {
-    name: "收费门架2号-东莞-惠州",
+    name: "收费门架2号-广龙高速",
     coor: [113.53664814, 22.889414444, 50],
   },
   {
-    name: "收费门架3号-东莞-惠州",
+    name: "收费门架3号-广龙高速",
     coor: [113.54738058, 22.88807333, 0],
+  },
+];
+let lineMarck = [
+  {
+    name: "收费路段-广龙高速",
+    coor: [113.53847636, 22.88947255, 100],
   },
 ];
 export default {
@@ -120,7 +126,7 @@ export default {
       const line = viewer.entities.add({
         polyline: {
           positions: positions,
-          material: Cesium.Color.YELLOW,
+          material: Cesium.Color.RED,
           width: 5,
         },
       });
@@ -147,6 +153,42 @@ export default {
           },
         });
       });
+
+      let popup = new tqsdk.popup.HeightPopup(
+        {
+          position: Cesium.Cartesian3.fromDegrees(
+            lineMarck[0].coor[0],
+            lineMarck[0].coor[1],
+            lineMarck[0].coor[2]
+          ),
+          height: 200,
+          id: "xxxsssssID",
+        },
+        {
+          label: {
+            text: lineMarck[0].name,
+            font: "20pt monospace",
+            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+              0,
+              1e6
+            ),
+            backgroundColor: Cesium.Color.fromCssColorString("green"),
+          },
+          verticalLine: {
+            material: new Cesium.PolylineDashMaterialProperty({
+              color: Cesium.Color.fromCssColorString("#E27F21"),
+              dashLength: 20,
+            }),
+            distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+              0,
+              1e4
+            ),
+            show: false,
+          },
+        }
+      );
+      let entity = window.viewer.entities.add(popup.entitys[0]);
+
       // viewer.zoomTo(line);
 
       // const lableData = [
