@@ -89,6 +89,7 @@
         </div>
       </template>
     </vxe-modal>
+    <Zoom ref="ZoomNode"></Zoom>
   </div>
 </template>
 
@@ -104,6 +105,7 @@ import zhuangData from "@/data/zhuang.js";
 
 import MousePosition from "@/components/MousePosition/index.vue";
 import RoadInfor from "@/components/RoadInfor/index.vue";
+import Zoom from "@/components/Zoom/index.vue";
 let importD = {
   type: "FeatureCollection",
   features: [
@@ -302,6 +304,7 @@ export default {
     SideSlope,
     MousePosition,
     RoadInfor,
+    Zoom,
   },
   beforeCreate() {
     this.ZDsID = [];
@@ -317,6 +320,16 @@ export default {
       this.showZD(zhuangData);
       this.$refs.MousePositionNode.init(viewer);
       this.addModel();
+      this.$refs.ZoomNode.init(viewer, {
+        position: {
+          x: -2288527.633595279,
+          y: 5416701.680130981,
+          z: 2479141.5121104,
+        },
+        heading: 6.205986638440258,
+        pitch: -1.519474892421977,
+        roll: 0.00016533437211307955,
+      });
     });
   },
   methods: {
@@ -418,7 +431,7 @@ export default {
         let entity = viewer.entities.add({
           position: point,
           label: {
-            text: "桩号-"+arr[l].name,
+            text: "桩号-" + arr[l].name,
             font: "15pt monospace",
             distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
               0,
@@ -506,6 +519,7 @@ export default {
 /deep/ .el-tabs__item {
   color: #282121 !important;
   font-size: 17px;
+  font-weight: bold;
 }
 /deep/ .el-tabs__item.is-active {
   color: #409eff !important;

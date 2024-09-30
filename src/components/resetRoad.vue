@@ -16,11 +16,11 @@
       > -->
       <el-button
         type="danger"
-        icon="el-icon-delete"
         @click="removeAll"
         class="design-btn"
         size="small"
-      ></el-button>
+        >结束</el-button
+      >
     </div>
     <div class="item-p" v-show="isDrive">
       <!-- <div>
@@ -134,8 +134,9 @@ export default {
   methods: {
     //切换行车路线
     changeDrive(v) {
-      this.isDrive = true;
+     
       this.removeAll();
+      this.isDrive = true;
       let positions = v.map(
         (item) => new Cesium.Cartesian3(item.x, item.y, item.z)
       );
@@ -409,6 +410,7 @@ export default {
       }
     },
     removeAll() {
+      this.isDrive = false;
       init && init.removeAll();
       viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
       viewer.trackedEntity = undefined;
