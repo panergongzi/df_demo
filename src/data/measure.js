@@ -21,7 +21,7 @@ let measureToolList = [
       },
       label: {
         text: "测量",
-        font: "14px sans-serif",
+        font: "20px sans-serif",
         outlineColor: Cesium.Color.WHITE,
         outlineWidth: 2,
         pixelOffset: new Cesium.Cartesian2(0, -30),
@@ -51,13 +51,14 @@ let measureToolList = [
       },
       label: {
         text: "测量",
-        font: "14px sans-serif",
+        font: "20px sans-serif",
         pixelOffset: new Cesium.Cartesian2(0, -30),
         disableDepthTestDistance: Number.MAX_VALUE,
         showBackground: false,
         backgroundColor: Cesium.Color.fromCssColorString("#04A4B4"),
         scaleByDistance: new Cesium.NearFarScalar(0, 1, 1e6, 0.5),
         distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 5e4),
+        fillColor: Cesium.Color.fromCssColorString("red"),
       },
       polygon: {
         material: Cesium.Color.GREEN.withAlpha(0.4),
@@ -91,7 +92,7 @@ let measureToolList = [
       label: {
         show: false,
         text: "测量",
-        font: "14px sans-serif",
+        font: "20px sans-serif",
         pixelOffset: new Cesium.Cartesian2(0, -30),
         disableDepthTestDistance: Number.MAX_VALUE,
         showBackground: false,

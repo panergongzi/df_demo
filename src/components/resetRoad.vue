@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="item-p">
-      <p>选择行车路线</p>
+      <p class="item-title">选择行车路线</p>
       <div>
         <p
           v-for="(item, index) in drivePath"
@@ -22,7 +22,14 @@
         size="small"
       ></el-button>
     </div>
-    <div class="item-p">
+    <div class="item-p" v-show="isDrive">
+      <!-- <div>
+        速度：<el-input-number
+          v-model="speed"
+          @change="changeSpeed"
+          :min="1"
+        ></el-input-number>
+      </div> -->
       <el-select
         v-model="viewValue"
         placeholder="切换视角"
@@ -36,6 +43,12 @@
         >
         </el-option>
       </el-select>
+    </div>
+    <div v-show="isDrive">
+      <p class="item-title">车辆信息</p>
+      <div>车牌：粤A0023XX</div>
+      <div>车速：{{ Math.ceil(speed) }}公里/小时</div>
+      <div>车辆颜色:红色</div>
     </div>
   </div>
 </template>
@@ -79,6 +92,8 @@ export default {
       roadDialog: false,
       lineData: linString,
       viewValue: "第一视角",
+      isDrive: false,
+      speed: 100,
       options: [
         {
           value: "第一视角",
@@ -91,6 +106,11 @@ export default {
       ],
       drivePath,
     };
+  },
+  computed: {
+    getSpeed() {
+      return this.speed * 20;
+    },
   },
   mounted() {
     this.$nextTick(() => {
@@ -112,11 +132,17 @@ export default {
   methods: {
     //切换行车路线
     changeDrive(v) {
+      this.isDrive = true;
       this.removeAll();
       let positions = v.map(
         (item) => new Cesium.Cartesian3(item.x, item.y, item.z)
       );
       this.addAnimation(positions);
+    },
+    changeSpeed() {
+      if (init) {
+        init.speed = this.speed / 20;
+      }
     },
     //路线
     openCarRoad() {
@@ -284,8 +310,8 @@ export default {
         positions: positions,
         animationType: 1,
         speedType: 0,
-        speed: 3, //速度
-        name: "粤A0023", //车牌
+        speed: this.speed / 20, //速度
+        name: "粤A0023XX", //车牌
         hpr: {
           heading: 0,
           pitch: 0,
@@ -296,8 +322,8 @@ export default {
           type: 1,
           offset: new Cesium.HeadingPitchRange(
             Cesium.Math.toRadians(90), //水平角度
-            Cesium.Math.toRadians(-10), //倾斜角度
-            10
+            Cesium.Math.toRadians(0), //倾斜角度
+            0.3
           ),
         },
         pathStyle: {
@@ -359,8 +385,8 @@ export default {
           type: 1,
           offset: new Cesium.HeadingPitchRange(
             Cesium.Math.toRadians(90), //水平角度
-            Cesium.Math.toRadians(-10), //倾斜角度
-            10
+            Cesium.Math.toRadians(0), //倾斜角度
+            0.3
           ),
         };
       }
@@ -370,9 +396,9 @@ export default {
         init.animation._viewAngle = {
           type: 2,
           offset: new Cesium.HeadingPitchRange(
-            Cesium.Math.toRadians(180), //水平角度
-            Cesium.Math.toRadians(-45), //倾斜角度
-            50
+            Cesium.Math.toRadians(90), //水平角度
+            Cesium.Math.toRadians(0), //倾斜角度
+            5
           ),
         };
       }
@@ -391,5 +417,9 @@ export default {
 }
 .item-p {
   margin-bottom: 10px;
+}
+.item-title {
+  font-size: 17px;
+  font-weight: bold;
 }
 </style>

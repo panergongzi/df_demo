@@ -5,7 +5,7 @@ let plottingList = [
     icon: "./img/1.png",
     style: {
       point: {
-        pixelSize: 10,
+        pixelSize: 20,
         color: "green",
         // outlineColor: "#ffffff",
         // outlineWidth: 2,
@@ -42,7 +42,7 @@ let plottingList = [
       },
       polyline: {
         // material: "#EEE06C",
-        width: 5,
+        width: 15,
         // depthFailMaterial: "#EEE06C",
         color: "green",
         depthFailColor: "green",
