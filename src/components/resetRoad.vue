@@ -86,6 +86,7 @@ let lineMarck = [
     coor: [113.53847636, 22.88947255, 100],
   },
 ];
+let pthLine;
 export default {
   data() {
     return {
@@ -94,6 +95,7 @@ export default {
       viewValue: "第一视角",
       isDrive: false,
       speed: 100,
+      // sppedShow: 100,
       options: [
         {
           value: "第一视角",
@@ -149,7 +151,7 @@ export default {
       let positions = drivePath[0].map(
         (item) => new Cesium.Cartesian3(item.x, item.y, item.z)
       );
-      const line = viewer.entities.add({
+      pthLine = viewer.entities.add({
         polyline: {
           positions: positions,
           material: Cesium.Color.RED,
@@ -371,6 +373,9 @@ export default {
       };
       init.add(params);
       init.path.featureLayer.flyToEntitys();
+      if (pthLine) {
+        pthLine.show = false;
+      }
     },
     changeView(v) {
       if (v === "第一视角") {
