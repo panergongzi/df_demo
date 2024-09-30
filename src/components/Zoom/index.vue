@@ -73,23 +73,16 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style  scoped>
 .zoom-grout.x-convert {
-  // position: absolute;
-  // right: 5px;
-  // bottom: 35px;
-  //z-index: 3;
-  // width: 40px;
-  // text-align: center;
-
   z-index: 3;
   width: 40px;
   text-align: center;
   position: absolute;
   right: 20px;
   bottom: 50px;
-  .zoom-item {
-    margin-bottom: 10px;
-  }
+}
+.zoom-item {
+  margin-bottom: 10px;
 }
 </style>
