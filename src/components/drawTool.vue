@@ -84,7 +84,7 @@ export default {
       tqsdk.camera.setCamera(viewer, view);
     },
     downloadAll() {
-      platting.downloadAll("标绘数据", "txt");
+      platting.downloadAll("标绘数据", ".bin");
     },
   },
   destroyed() {
